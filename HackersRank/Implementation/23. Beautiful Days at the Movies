@@ -1,0 +1,42 @@
+# Beautiful Days at the Movies
+
+## problem
+
+기계친구 릴리는 정수로 나눠떨어지는걸 좋아함
+
+| 입력값 - 입력값의 리버스 | / 마지막값 중 정수인 값 카운트
+
+Sample Input
+
+20 23 6
+
+Sample Output
+
+2
+
+## solve 
+```javascript
+
+function processData(input) {
+    //카운트 변수 
+    var count = 0; 
+    //사용자에게 받은 토큰 분리 
+    var arr = input.split(" ").map(Number);
+    
+    //정수일 경우 카운트
+    for(var i = arr[0] ; i <= arr[1] ; i++)
+        if((abs(i,rev(i),arr[2])/arr[2])%1 === 0)
+            count++;
+    console.log(count)
+} 
+//문자열 리버스 
+function rev(num){
+    return parseInt(String(num).split("").reverse().join(""));
+}
+//값 차이 절댓값 
+function abs(n1,n2){
+    return n1-n2>0?n1-n2:n2-n1;
+}
+
+
+```
