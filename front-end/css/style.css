@@ -1,0 +1,26 @@
+
+html {
+  font-family: 'Lato', sans-serif;
+  color: #fff;
+}
+
+body {
+  padding: 30px 0;
+}
+
+.parent {
+  width: 400px;
+  height: 600px;;
+  margin: 0 auto;
+  background-color: #ecedef;
+}
+
+.child {
+  width: 200px;
+  height: 200px;
+  line-height: 200px;
+  text-align: center;
+}
+.red { background-color: #e74c3c;  }
+.yellow { background-color: #f1c40f; }
+.blue { background-color: #0066ff;  }
