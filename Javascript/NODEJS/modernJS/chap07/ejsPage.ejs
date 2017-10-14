@@ -1,10 +1,15 @@
-<% var name = "soomti" %>
+<% var name = "soomti is my life hihihihihiihi                " %>
+<p> %= tag </p>
+<%=name -%>
+<%= 52*273 -%>
 
-<h1><%=name %></h1>
-<p><%= 52 * 273 %></p>
+<p> %- tag  </p>
+
+<%- name %>
+<%- 52 * 273 %>
 
 <hr />
 
 <% for(var i = 0 ; i < 10 ; i ++){ %>
-    <h2>the square of <%= i %> is <%= i * i %></h2>
+    <h2>the square of <%- i %> is <%- i * i %></h2>
 <% } %>

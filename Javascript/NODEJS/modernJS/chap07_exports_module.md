@@ -40,19 +40,31 @@ node.js의 프로젝트 설정정보를 담은 파일
 
 ### 7-1 ejs 모듈
 
-특정 형식의 문자열을 HTML 형식의 문자열로 반환한다.
+
+##### 템플릿모듈. 특정 형식의 문자열을 HTML 형식의 문자열로 반환한다.
+구글에 쿠키랑 고양이랑 검색을 해볼 경우,
+보여주는 검색 결과는 다르지만 ui 가 같은 걸 알 수 있다. 정적인 html으 경우 각각 하나의 html 파일로 응답해야 하지만, html을  템플릿 모듈을 사용하여 정적인 html 파일을 동적이게 만들 수 있다.
+
+
 
 #### 1. 설치
 
 ```
-npm install ejs 
+$ npm install ejs 
 ```
 
 #### 2. 추출
 
 ``` javascript 
-    // ejs 모듈을 추출한다.
-    var ejs = require('ejs') 
+// ejs 모듈을 추출한다.
+var ejs = require('ejs') 
+```
+
+#### 3. 변환
+
+```javascript 
+// ejs 문자열을 html 문자열로 변경해준다.
+ejs.render(data);
 ```
 
 ### ejs 모듈 sample code
@@ -118,11 +130,158 @@ the square of 9 is 81
 
 #### ejs  파일의 특수 태그
 
-밑에 2가지 특수 코드들은 render 메소드를 통해 html의 문자열로 변경된다.
+밑에 특수 코드들은 render 메소드를 통해 html의 문자열로 변경된다.
 
 ```
 <% code %> // 자바스크립트 코드를 입력한다.
 <%= value %> // 데이터를 출력한다
+<%% // <%fmf 출력 하고 싶을때 사용 
+<%# // comment tag
 ```
 
 
+### 7-3 서버 실행 모듈
+
+* 지역 모듈 : 자바스크립트 파일 내부에서 사용하는 모듈
+* 전역 모듈 : 터미널에서 사용할 수 있는 모듈. 전역모듈 설치 시 -g 라는 옵션을 사용한다. 시스템에 깔겠다는 명령어
+
+```
+$ npm install -g supervisor
+$ npm install -g forever
+```
+
+#### supervisor 모듈
+
+``` $ node app.js ``` 의 경우, 서버를 키고 파일 내용을 변경 시에 인식을 못한다. 
+
+ ```supervisor``` 모듈은 파일 내용 변경을 인식하는 모듈로, 자동으로 인식하여 실행을 종료시킨후에 다시 실행시킨다.
+
+ ##### 1.설치
+
+ ```
+ $ sudo npm install -g supervisor
+ [sudo] password for USER : 비밀번호 입력
+ ```
+
+##### 2. 설치 확인
+
+```
+$ supervisor
+
+---------- 실행 결과 ----------
+
+Node Supervisor is used to restart programs when they crash.
+It can also be used to restart programs when a *.js file changes.
+
+Usage:
+  supervisor [options] <program>
+  supervisor [options] -- <program> [args ...]
+
+Required:
+  <program>
+    The program to run.
+
+Options:
+  -w|--watch <watchItems>
+    A comma-delimited list of folders or js files to watch for changes.
+    When a change to a js file occurs, reload the program
+    Default is '.'
+
+  -i|--ignore <ignoreItems>
+    A comma-delimited list of folders to ignore for changes.
+    No default
+
+  --ignore-symlinks
+    Enable symbolic links ignoring when looking for files to watch.
+
+  -p|--poll-interval <milliseconds>
+    How often to poll watched files for changes.
+    Defaults to Node default.
+
+  -e|--extensions <extensions>
+    Specific file extensions to watch in addition to defaults.
+    Used when --watch option includes folders
+    Default is 'node,js'
+
+  -x|--exec <executable>
+    The executable that runs the specified program.
+    Default is 'node'
+
+  --debug[=port]
+    Start node with --debug flag.
+
+  --debug-brk[=port]
+    Start node with --debug-brk[=port] flag.
+
+  --harmony
+    Start node with --harmony flag.
+  --inspect
+    Start node with --inspect flag.
+
+  --harmony_default_parameters
+    Start node with --harmony_default_parameters flag.
+
+  -n|--no-restart-on error|exit
+    Don't automatically restart the supervised program if it ends.
+    Supervisor will wait for a change in the source files.
+    If "error", an exit code of 0 will still restart.
+    If "exit", no restart regardless of exit code.
+    If "success", no restart only if exit code is 0.
+
+  -t|--non-interactive
+    Disable interactive capacity.
+    With this option, supervisor won't listen to stdin.
+
+  -k|--instant-kill
+    use SIGKILL (-9) to terminate child instead of the more gentle SIGTERM.
+
+  --force-watch
+    Use fs.watch instead of fs.watchFile.
+    This may be useful if you see a high cpu load on a windows machine.
+
+  -s|--timestamp
+    Log timestamp after each run.
+    Make it easy to tell when the task last ran.
+
+  -h|--help|-?
+    Display these usage instructions.
+
+  -q|--quiet
+    Suppress DEBUG messages
+
+  -V|--verbose
+    Show extra DEBUG messages
+
+Options available after start:
+rs - restart process.
+     Useful for restarting supervisor eaven if no file has changed.
+
+Examples:
+  supervisor myapp.js
+  supervisor myapp.coffee
+  supervisor -w scripts -e myext -x myrunner myapp
+  supervisor -- server.js -h host -p port
+```
+
+##### example
+
+``` javascript
+// 터미널 실행 
+$ supervisor test.server.js
+
+Running node-supervisor with
+  program 'test.server.js'
+  --watch '.'
+  --extensions 'node,js'
+  --exec 'node'
+
+Starting child process with 'node test.server.js'
+Watching directory '/Users/Soomti/STUDY/Javascript/NODEJS/modernJS/chap07' for changes.
+Press rs for restarting the process.
+test!
+// 파일 변경후 저장 버튼 누른 후 
+crashing child
+Starting child process with 'node test.server.js'
+test changed!
+
+```
