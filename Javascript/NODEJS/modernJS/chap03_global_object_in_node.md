@@ -163,7 +163,7 @@ process.argv.forEach(function(item,index) {
 $ node node.process.js --exit 10000
 ```
 
-#### process.argv,process.exit() result
+#### process.argv() , process.exit() result
 
 ```
 0 : string :  /usr/local/bin/node //node 의 경로를 출력 
@@ -175,3 +175,39 @@ $ node node.process.js --exit 10000
 ```
 
 ## 3.4 exports 객체와 모듈 
+
+기능을 쉽게 사용하고자 메서드와 속성을 미리 정의해 모아놓은것 모듈을 사용해 기능을 확장한다
+
+### 모듈 생성
+
+별도의 자바스크립트 파일을 생성해야한다.
+* 모듈을 생성할 때는 ```exports``` 객체를 사용한다
+* ```exports```객체에 속성이나 메서드를 지정한다
+
+#### module.js
+
+```javascript
+// exports.method_name 으로 생성해준다.
+// 절댓값을 구하는 메서드
+exports.abs = function(number){    
+    if(0 < number){
+        return number;
+    }
+    else{
+        return -number;
+    }
+}
+exports.circleArea = function(radius){
+    return radius * radius * Math.PI;
+};
+```
+### 모듈 추출
+생성한 모듈을 다른 파일에서 추출할때는 require() 함수를 사용한다.
+#### main.js
+```javascript
+// 모듈을 추출
+var module = require('./module.js');
+// 모듈을 사용
+console.log('abs(-273) = %d ', module.abs(-273);
+console.log('circleArea(3) = %d ',module.circleArea(3));
+```
