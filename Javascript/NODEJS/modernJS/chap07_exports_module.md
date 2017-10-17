@@ -1,12 +1,12 @@
-# chap07 외부 모듈
+## chap07 외부 모듈
 
 
-## 외부모듈이란 
+### 외부모듈이란 
 
 일반 개발자가 만들어 배포한 모듈
 npm을 기반으로 모듈을 공유한다
 
-## npm
+### npm
 
 Node.js의 패키지를 모아둔 유틸리티
 Node.js 패키지 설치, 버전 및 호환성 관리할 수 있다
@@ -285,3 +285,117 @@ Starting child process with 'node test.server.js'
 test changed!
 
 ```
+
+
+#### forever 모듈
+
+단일 스레드 기반인 node.js 웹 서비스는 예외 하나로 웹 서비스가 크게 죽어버리는데, 이런 상황을 대비하고자 만든 모듈 
+
+ ##### 1.설치
+
+ ```
+ $ sudo npm install -g forever
+ [sudo] password for USER : 비밀번호 입력
+ ```
+
+##### 2. 실행
+
+```
+$ forever
+
+// 실행 결과 
+
+help:    usage: forever [action] [options] SCRIPT [script-options]
+help:
+help:    Monitors the script specified in the current process or as a daemon
+help:
+help:    actions:
+help:      start               Start SCRIPT as a daemon
+help:      stop                Stop the daemon SCRIPT by Id|Uid|Pid|Index|Script
+help:      stopall             Stop all running forever scripts
+help:      restart             Restart the daemon SCRIPT
+help:      restartall          Restart all running forever scripts
+help:      list                List all running forever scripts
+help:      config              Lists all forever user configuration
+help:      set <key> <val>     Sets the specified forever config <key>
+help:      clear <key>         Clears the specified forever config <key>
+help:      logs                Lists log files for all forever processes
+help:      logs <script|index> Tails the logs for <script|index>
+help:      columns add <col>   Adds the specified column to the output in `forever list`
+help:      columns rm <col>    Removed the specified column from the output in `forever list`
+help:      columns set <cols>  Set all columns for the output in `forever list`
+help:      columns reset       Resets all columns to defaults for the output in `forever list`
+help:      cleanlogs           [CAREFUL] Deletes all historical forever log files
+help:
+help:    options:
+help:      -m  MAX          Only run the specified script MAX times
+help:      -l  LOGFILE      Logs the forever output to LOGFILE
+help:      -o  OUTFILE      Logs stdout from child script to OUTFILE
+help:      -e  ERRFILE      Logs stderr from child script to ERRFILE
+help:      -p  PATH         Base path for all forever related files (pid files, etc.)
+help:      -c  COMMAND      COMMAND to execute (defaults to node)
+help:      -a, --append     Append logs
+help:      -f, --fifo       Stream logs to stdout
+help:      -n, --number     Number of log lines to print
+help:      --pidFile        The pid file
+help:      --uid            Process uid, useful as a namespace for processes (must wrap in a string)
+help:                       e.g. forever start --uid "production" app.js
+help:                           forever stop production
+help:      --sourceDir      The source directory for which SCRIPT is relative to
+help:      --workingDir     The working directory in which SCRIPT will execute
+help:      --minUptime      Minimum uptime (millis) for a script to not be considered "spinning"
+help:      --spinSleepTime  Time to wait (millis) between launches of a spinning script.
+help:      --colors         --no-colors will disable output coloring
+help:      --plain          alias of --no-colors
+help:      -d, --debug      Forces forever to log debug output
+help:      -v, --verbose    Turns on the verbose messages from Forever
+help:      -s, --silent     Run the child script silencing stdout and stderr
+help:      -w, --watch      Watch for file changes
+help:      --watchDirectory Top-level directory to watch from
+help:      --watchIgnore    To ignore pattern when watch is enabled (multiple option is allowed)
+help:      -t, --killTree   Kills the entire child process tree on `stop`
+help:      --killSignal     Support exit signal customization (default is SIGKILL)
+help:                       used for restarting script gracefully e.g. --killSignal=SIGTERM
+help:      -h, --help       You're staring at it
+help:
+help:    [Long Running Process]
+help:      The forever process will continue to run outputting log messages to the console.
+help:      ex. forever -o out.log -e err.log my-script.js
+help:
+help:    [Daemon]
+help:      The forever process will run as a daemon which will make the target process start
+help:      in the background. This is extremely useful for remote starting simple node.js scripts
+help:      without using nohup. It is recommended to run start with -o -l, & -e.
+help:      ex. forever start -l forever.log -o out.log -e err.log my-daemon.js
+help:          forever stop my-daemon.js
+
+```
+
+##### sample code
+
+app.js
+
+``` javascript
+require('http').createServer(function(req,res){
+    if(req.url == '/'){
+        //response
+        res.write('<!DOCTYPE html>');
+        res.write('<html>');
+        res.write('<head>');
+        res.write('     <title>forever</title>');
+        res.write('</head>');
+        res.write('<body>');
+        res.write('     <h1>FOREVER</h1>');
+        res.write('</body>');
+        res.write('</html>');
+        res.end();
+    }
+    else{
+        //에러발생
+        error.error.error();
+    }
+}).listen(52273,function(){
+    console.log('server run!!');
+})
+```
+

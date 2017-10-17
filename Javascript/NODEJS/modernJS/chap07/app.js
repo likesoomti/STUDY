@@ -1,3 +1,26 @@
+require('http').createServer(function(req,res){
+    if(req.url == '/'){
+        //response
+        res.write('<!DOCTYPE html>');
+        res.write('<html>');
+        res.write('<head>');
+        res.write('     <title>forever</title>');
+        res.write('</head>');
+        res.write('<body>');
+        res.write('     <h1>FOREVER</h1>');
+        res.write('</body>');
+        res.write('</html>');
+        res.end();
+    }
+    else{
+        //에러발생시키기
+        error.error.error();
+    }
+}).listen(52273,function(){
+    console.log('server run!!');
+})
+
+/*
 // 파일 시스템 모듈 사용
 var fs = require('fs');
 // 서버 생성을 위한 http모듈 사용 
@@ -21,3 +44,4 @@ http.createServer(function(req,res){
 }).listen(52273,function(){
     console.log('server run');
 })
+*/
