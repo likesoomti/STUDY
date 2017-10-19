@@ -247,3 +247,145 @@ console.log(os.networkInterfaces());
       ],
 }
 ```
+
+### 4.2 url 모듈 
+
+# url 
+url 파싱 관련 모듈을 제공한다.
+###### mark
+```
+Stability: 2 - Stable
+```
+###### description
+The url module provides utilities for URL resolution and parsing. It can be accessed using:
+
+###### sample
+```javascript
+const url = require('url');
+```
+
+##### url 모듈의 메서드
+
+```parse``` :   url string을 url 객체로 반환
+
+```format``` : url 객체를 문자열로 반환 
+
+```resolve``` : 매개변수를 조합해 완전한 url 문자열을 생성해 반환
+
+--- 
+### parse 
+url string을 url 객체로 반환한다
+
+###### sample 
+```javascript
+const url = require('url');
+
+var url_obj = url.parse('https://www.naver.com/');
+console.log(url_obj);
+```
+###### result
+```json
+Url {
+  protocol: 'https:',
+  slashes: true,
+  auth: null,
+  host: 'www.naver.com',
+  port: null,
+  hostname: 'www.naver.com',
+  hash: null,
+  search: null,
+  query: null,
+  pathname: '/',
+  path: '/',
+  href: 'https://www.naver.com/' }
+```
+
+### format
+url 객체를 문자열로 반환한다.
+```javascript
+const url = require('url');
+
+var url_obj = url.parse('https://www.naver.com/');
+console.log(url.format(url_obj));
+```
+
+###### result
+```json
+https://www.naver.com/
+```
+
+---
+### 4.3 Query String 모듈 
+
+# Query String
+url 객체의 쿼리와 관련된 모듈 
+######  mark
+```
+Stability: 2 - Stable
+```
+###### description
+The querystring module provides utilities for parsing and formatting URL query strings. It can be accessed using:
+
+```javascript
+const querystring = require('querystring');
+```
+---
+
+##### query string 모듈의 메서드
+
+```stringfy``` : 쿼리 객체를 쿼리 문자열로 반환 
+
+```parse``` : 쿼리 문자열을 객체로 반환
+
+
+###### sample
+``` javascript
+const url = require('url');
+const query = require('querystring');
+
+//url string return obj
+var parseObj = url.parse('http://www.hanbit.co.kr/store/books/look.php?p_code=1234');
+console.log(parseObj.query); //p_code=1234
+//parse -> return obj 
+console.log(query.parse(parseObj.query));
+```
+###### result
+```
+p_code=1234
+{ p_code: '1234' }
+```
+
+---
+### 4.4 util 모듈 
+
+# util
+node.js 의 보조적인 기능을 모아둔 모듈.
+######  mark
+```
+Stability: 2 - Stable
+```
+###### description
+The util module is primarily designed to support the needs of Node.js' own internal APIs. However, many of the utilities are useful for application and module developers as well. It can be accessed using:
+
+```javascript
+const util = require('util');
+````
+
+
+##### util 모듈의 메서드
+
+```format``` :   매개변수로 입력한 문자열을 조합해 반환. console.log() 와 비슷하나 출력을 하지 않는다.
+
+###### sample
+
+```javascript
+const util = require('util');
+// not print
+var data = util.format('%d + %d = %d ',52,273,52+273);
+console.log(data);
+```
+
+###### result
+```
+52 + 273 = 325
+```
