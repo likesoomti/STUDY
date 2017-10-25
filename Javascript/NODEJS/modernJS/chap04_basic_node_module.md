@@ -391,9 +391,10 @@ console.log(data);
 ```
 ---
 
-### 4.5 crypto 모듈 : 해시 생성 및 암호화 수행 
+### 4.5 crypto 모듈  
 
 # Crypto 
+해시 생성 및 암호화 수행하는 모듈 
 ###### mark
 ```
 Stability: 2 - Stable
@@ -412,4 +413,134 @@ const hash = crypto.createHmac('sha256', secret)
 console.log(hash);
 // Prints:
 //   c0fa1bc00531bd78ef38c628449c5102aeabd49b5dc3a2a516ea6ea959d6658e
+```
+
+### 4.6 File System 모듈 
+
+# File System 
+파일 처리 관련된 모듈 
+```
+Stability: 2 - Stable
+```
+File I/O is provided by simple wrappers around standard POSIX functions. To use this module do require('fs'). All the methods have asynchronous and synchronous forms.
+
+```javascript
+const fs = require('fs');
+
+fs.unlink('/tmp/hello', (err) => {
+  if (err) throw err;
+  console.log('successfully deleted /tmp/hello');
+});
+```
+##### File System 모듈의 메서드
+
+
+```readFile``` : 파일을 비동기 적으로 읽는다.
+
+```readFileSync``` : 파일을 동기적으로 읽는다.
+
+```writeFile``` : 파일을 비동기적으로 쓴다.
+
+```writeFileSync``` : 파일을 동기적으로 쓴다.
+
+### 파일 읽기 
+
+#### readFileSync(path,encoding,callback)
+###### sample
+```javascript
+//file system은 다른 모듈과 다르게 줄임말 사용
+var fs = require('fs');
+//fs.readFile(path,encoding)
+var text = fs.readFileSync('textfile.txt','utf8');
+console.log(text);
+```
+###### result
+```
+this is textfile.txt
+```
+
+#### readFile(path,encoding,callback)
+###### sample
+```javascript
+//file system은 다른 모듈과 다르게 줄임말 사용
+//매개변수에 경로, 인코딩 방식, 콜백함수를 매개로 받는다. 비동기이므로 이벤트 리스너를 등록하고, 완료 시 이벤트 리스너를 실행한다.
+var fs = require('fs');
+//fs.readFile(path,encoding,callback)
+fs.readFile('textfile.txt','utf8',function(error,data){
+    console.log(data)
+})
+```
+###### result
+```
+this is textfile.txt
+```
+
+### 파일 쓰기
+
+#### writeFile (path,data,encoding,callback) 
+#### writeFileSync (path,data,encoding)
+
+###### sample
+
+``` javascript
+var data = 'hello world.. soomin jang!';
+
+// 비동기 파일 쓰기
+// 동기식과는 다르게 콜백이 붙음 
+// fs.writeFile(path,data,encoding,callback)
+fs.writeFile('writeFile.txt',data,'utf8',function(err){
+    console.log('write is async complete')
+})
+// 동기 파일 쓰기
+//fs.writeFileSync(path,data,encoding)
+fs.writeFileSync('writeFileSync.txt',data,'utf8')
+console.log('write sync is complete');
+```
+###### result
+```
+write sync is complete
+write is async complete`
+```
+
+### 예외처리 
+
+#### SYNC 
+try catch 구문을 사용
+
+###### sample
+
+```javascript
+const fs = require('fs');
+try{
+    var data = fs.readFileSync('textfile.txt','utf8');
+    console.log(data);
+}catch(e){
+    console.log(e);
+}
+
+```
+#### ASYNC
+callback function을 사용
+
+###### sample
+```javascript 
+// async callback => function(err,data) 
+// callback error 를 통해 exception 처리 
+fs.readFile('textfile.txt','utf8',function(err,data){
+  if(err){
+    console.log(err);
+  }else{
+    console.log(data);
+  }
+});
+```
+
+##### 조기 리턴
+오류 처리 시 오류만 출력하고 간단하게 종료하기위해 조기 리턴을 사용한다 . 
+```javascript 
+fs.readFile('textfile.txt','utf8',function(err,data){
+  if(err) return console.log(err);
+
+  console.log("success wnna flow")
+});
 ```

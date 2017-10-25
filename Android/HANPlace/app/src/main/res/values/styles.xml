@@ -1,0 +1,121 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--soomin-->
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+    <!--common-->
+    <!--메뉴 아이콘 사진 규격 -->
+    <style name="menu_icon_color">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <!-- 지도 버튼 스타일 -->
+    <style name="MapButtonStyle" parent="@style/menu_icon_color">
+
+        <item name="android:layout_width">100dp</item>
+        <item name="android:background">@color/Hblue</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">2dp</item>
+    </style>
+
+    <!--center event style-->
+
+    <style name="CenterEventStyle" parent="@style/menu_icon_color">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/Hblue</item>
+        <item name="android:layout_gravity">center</item>
+
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <!--view -->
+
+    <style name="EditTextStyle">
+        <item name="android:textColor">#000000</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_width">240dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">@drawable/form_login</item>
+        <item name="android:textCursorDrawable">@color/Hgrey</item>
+        <item name="android:textColorHint">#9A9A9A</item>
+    </style>
+
+    <style name="ButtonStyle">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_width">250dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/Hblue</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:text">BUTTON</item>
+    </style>
+
+
+    <style name="TextButtonStyle">
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/Hblue</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+
+    <style name="Material"></style>
+
+    <style name="Material.Drawable"></style>
+
+    <!--no action bar -->
+    <style name="Theme.AppCompat.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <!-- the theme applied to the application or activity -->
+    <style name="CustomActionBarTheme"
+        parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+    </style>
+    <!-- ActionBar styles -->
+    <style name="MyActionBar"
+        parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">#FF0000</item>
+    </style>
+    <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
+    </style>
+    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/Hblue"
+    android:orientation="vertical"
+
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:layout_marginTop="100dp"
+        android:text="@string/app_name"
+        android:textSize="48dp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        />
+
+    <ImageView
+        android:id="@+id/main_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="30dp"
+        android:layout_gravity="center"
+        android:src="@drawable/duck"
+        />
+
+
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:text="한강이 즐거워진다!"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+
+        />
+</LinearLayout>

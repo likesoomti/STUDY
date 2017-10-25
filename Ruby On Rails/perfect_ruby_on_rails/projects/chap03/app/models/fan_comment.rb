@@ -1,0 +1,2 @@
+class FanComment < ApplicationRecord
+end

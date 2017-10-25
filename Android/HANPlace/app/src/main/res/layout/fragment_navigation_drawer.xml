@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+
+    <RelativeLayout
+        android:id="@+id/nav_header_container"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/Hblue">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@+id/nav_header_container"
+        android:layout_alignParentStart="true">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nav_header_container"
+        android:layout_margin="50px"
+        android:layout_marginTop="16dp"
+        android:text="MAP"
+        android:textColor="@color/Hblue" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nav_header_container"
+        android:layout_margin="50px"
+        android:layout_marginTop="16dp"
+        android:text="EVENT"
+        android:textColor="@color/Hblue" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/nav_header_container"
+        android:layout_margin="50px"
+        android:layout_marginTop="16dp"
+        android:text="MY MENU"
+        android:textColor="@color/Hblue" />
+    </LinearLayout>
+
+</RelativeLayout>

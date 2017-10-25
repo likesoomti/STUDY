@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        style="@style/EditTextStyle"
+        android:textCursorDrawable="@color/Hgrey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:id="@+id/email"/>
+
+    <EditText
+        style="@style/EditTextStyle"
+        android:textCursorDrawable="@color/Hgrey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:id="@+id/pw"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="btnClick"
+        android:text="Login"
+        android:id="@+id/loginBtn"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Facebook Login"
+        android:id="@+id/facebookBtn"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Join in"
+        android:onClick="btnClick"
+        android:id="@+id/join"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="find Id/Pw"
+        android:onClick="btnClick"
+        android:id="@+id/findPw"/>
+
+</LinearLayout>

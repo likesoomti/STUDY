@@ -1,0 +1,15 @@
+{
+  "short_name": "HPLACE",
+  "name": "Admin",
+  "icons": [
+    {
+      "username": "launcher-icon-1x.png",
+      "message": "image/png",
+	  "gcm_sender_id": "103953800507",
+	  "provider": "anonymous",
+	  "uid": "cd0b2a40-c7d6-4ca6-bab9-dafa90fc2e49"
+      }
+      ],
+  "start_url": "admin_chat.jsp?launcher=true"
+
+}
