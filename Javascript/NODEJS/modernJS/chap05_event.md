@@ -229,17 +229,17 @@ goodbye
 상속 받은 객체는 EventEmitter를 생성자 함수로 생성할 수 있다.
 #### EventEmitter의 메서드
 
-```addListener(eventName,eventHandler)``` : 이벤트를 연결한다
+* ```addListener(eventName,eventHandler)``` : 이벤트를 연결한다
 
-```on(eventName,eventHandler)``` : 이벤트를 연결한다
+* ```on(eventName,eventHandler)``` : 이벤트를 연결한다
 
-```setMaxListeners(limit)``` : 이벤트 리스너 연결 개수를 조절
+* ```setMaxListeners(limit)``` : 이벤트 리스너 연결 개수를 조절
 
-```removeListener(eventName,handler)``` : 특정 이벤트 리스너 제거
+* ```removeListener(eventName,handler)``` : 특정 이벤트 리스너 제거
 
-```removeAllListeners([EventName])``` : 모든 이벤트 리스너 제거 
+* ```removeAllListeners([EventName])``` : 모든 이벤트 리스너 제거 
 
-```once(eventName,eventHandler)``` : 이벤트 리스너를 한번만 연결 
+* ```once(eventName,eventHandler)``` : 이벤트 리스너를 한번만 연결 
 
 ###### 이벤트 생성 sample
 ```javascript
