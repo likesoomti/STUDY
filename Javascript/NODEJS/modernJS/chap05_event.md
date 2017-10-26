@@ -227,7 +227,6 @@ goodbye
 ## 5. 이벤트 강제 발생
 ```EventEmitter```: Node.js에서 이벤트를 연결할수 있는 객체의 부모 .
 상속 받은 객체는 EventEmitter를 생성자 함수로 생성할 수 있다.
-
 #### EventEmitter의 메서드
 
 ```addListener(eventName,eventHandler)``` : 이벤트를 연결한다
@@ -242,4 +241,63 @@ goodbye
 
 ```once(eventName,eventHandler)``` : 이벤트 리스너를 한번만 연결 
 
-###### sample
+###### 이벤트 생성 sample
+```javascript
+// EventEmitter 객체 생성instead.
+var custom = new process.EventEmitter();
+// event on
+custom.on('tick',function(code){
+    console.log('event exe');
+});
+// force event
+custom.emit('tick');
+```
+
+###### result
+```javascript
+// DeprecationWarning: process.EventEmitter is deprecated. Use require('events') 
+event exe
+```
+
+
+##### 이벤트는 생성부분과 연결 부분을 모듈로 분리해 사용한다!! 
+
+###### sample 
+rint.js
+
+```javascript
+// rint.js 모듈 생성하는 파일 
+// ----------------------
+//exports.timer = new.process.EventEmitter();
+//process.EventEmitter is deprecated. Use require('events') instead.
+var event = require('events');
+exports.timer = new event.EventEmitter();
+
+// setInterval은 Timers의 모듈
+// 전역 모듈이어서 그냥 사용가능한듯 ?
+setInterval(function(){
+    exports.timer.emit('tick');
+},1000);
+```
+app.js
+```javascript
+// app.js 모듈 추출해서 사용하는 파일 
+// ----------------------------
+// rint.js module 추출
+var rint = require('./rint');
+// event on
+rint.timer.on('tick',function(code){
+    console.log("event on!");
+})
+```
+
+###### result 
+```
+event on!
+event on!
+event on!
+event on!
+^C(강제 종료)
+```
+
+
