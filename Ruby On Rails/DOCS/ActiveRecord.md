@@ -52,4 +52,23 @@ Active Record는 Database의 ```TABLE```과 App의 ```Object```를  자동으로
 ### 2. 스키마 명명규칙
 
 #### Schema???
-```Schema```는 ```Database``` 자료에 대한 구조, 표현 방법, 관계를 형식 언어로 정의한 구조이다.
+
+```Schema```는 ```Database``` 대한 구조, 표현 방법, 관계를 형식 언어로 정의한 구조이다. ```Active Record```에서는 ```Table```을 ```Object```로 바꿔주기 때문에 사용 목적에 따른 규칙이 필요하다.
+
+1. **Foreign keys** : 테이블 명의 단수형 id (ex: item_id) Active Record가 모델간의 관계를 설정할때 사용 
+
+2. **Primary Keys**  :  Integer 형 id 이름을 기본키로 가진다 `Active Record Migrations` 시 자동으로 생성해준다.
+
+#### Active Record instance Options
+* 밑에 컬럼명은 예약어이기 때문에 사용을 피해하는 것이 좋다.
+
+| Options     | Description                    |
+| ----------- | :-----------------------------:|
+| `created_at`  | 레코드가 생성된 시점의 시각을 자동으로 저장| 
+| `updated_at`  | 레코드가 갱신된 시점의 시각을 자동으로 저장|
+| `lock_version`| 모델에 optimistic locking을 추가    |
+| `type`        | 모델에 Single Table Inheritance를 |사용하는 경우 추가
+| `관계명_type`   | Polymorphic Associations의 종류를 저장|
+| `테이블명_count`| 관계 설정에 있어서 속해있는 객체 숫자를 캐싱하기 위해서 사용 |
+
+
