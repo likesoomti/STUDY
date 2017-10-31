@@ -1,0 +1,46 @@
+
+<h1>Link Helpler</h1>
+
+<h2>link_to_if,link_to_unless</h2>
+<%= link_to 'apply', 'https://github.com/likesoomti/STUDY' %>  <br />
+
+=> <a href="https://github.com/likesoomti/STUDY">apply</a>  <br />
+
+<%= link_to 'Top', {controller: :home, action: :index }, id: :link, class: :menu %>  <br />
+
+=> <a id="link" class="menu" href="/home/index">Top</a>  <br />
+
+<hr>
+<% @user = true %>
+<%= link_to_if @user, 'link_to_if_true', controller: :home, action: :index %>  <br />
+
+<%= link_to_if !@user, 'link_to_if_false', controller: :home, action: :index %>  <br />
+
+<%= link_to_unless @user, 'link_to_unless_true', controller: :home, action: :index %> <br />
+
+<%= link_to_unless !@user, 'link_to_unless_false', controller: :home, action: :index %> <br />
+
+<hr>
+
+<h2>link_to_unless_current</h2>
+<%= link_to_unless_current 'current_page' ,action: :index %>  <br />
+
+# => current_page  <br />
+<%= link_to_unless_current 'no_current_page' ,action: :new %>  <br />
+
+# => <a href="/home/new">no_current_page</a>  <br />
+
+<hr>
+
+<h2>mail to</h2>
+<%= mail_to 'soomti@haha.com' %> <br />
+
+# => <a href="mailto:soomti@haha.com">soomti@haha.com</a>
+
+<%= mail_to 'soomti@haha.com', 'question here' %> <br />
+
+# => <a href="mailto:soomti@haha.com">question here</a>
+
+<%= mail_to 'soomti@haha.com', nil, subject: 'question', cc: "test@test.com" %> <br />
+
+# => <a href="mailto:soomti@haha.com?cc=test%40test.com&amp;subject=question">soomti@haha.com</a>

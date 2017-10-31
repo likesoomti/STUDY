@@ -1,0 +1,24 @@
+<h1>form tag </h1>
+<%= form_tag({controller: :home, action: :search},
+id: :fm, class: :search) do %>
+ 검색 키워드 : 
+ <%=    text_field_tag (:keywd), '' , size: 30 %>
+ <%=    submit_tag 'search' %>
+ <% end %>
+
+ <hr> 
+
+ <h1>모델을 사용한 form tag</h1>
+
+ <%= form_tag(action: :create) do %>
+ <div class="field">
+     <%= label :book , :isbn %> <br />
+     <%= text_field_tag :book, :isbn, size: 25 %>
+ </div>
+ <div>
+    <%= label :book, :title %> <br />
+    <%= text_field_tag :book, :title, size: 25 %>
+</div>
+<% end %>
+<hr>
+

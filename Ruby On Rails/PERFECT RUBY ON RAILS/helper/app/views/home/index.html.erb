@@ -1,22 +1,27 @@
-<h1>form tag </h1>
-<%= form_tag({controller: :home, action: :search},
-id: :fm, class: :search) do %>
- 검색 키워드 : 
- <%=    text_field_tag (:keywd), '' , size: 30 %>
- <%=    submit_tag 'search' %>
- <% end %>
 
- <hr> 
-
- <h1>모델을 사용한 form tag</h1>
-
- <%= form_tag(action: :create) do %>
- <div class="field">
-     <%= label :book , :isbn %> <br />
-     <%= text_field_tag :book, :isbn, size: 25 %>
- </div>
- <div>
-    <%= label :book, :title %> <br />
-    <%= text_field_tag :book, :title, size: 25 %>
+<div class="container">
+    <div class="head">
+        <h1>helper view</h1>
+    </div>    
+    <div class="form">
+        <%= link_to '폼태그극',home_form_helper_path %> 
+    </div>
+    <div class="link">
+    <%= link_to '링크태그',home_link_helper_path %> <br />
+    </div>
 </div>
-<% end %>
+<style>
+    .container{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+    }
+    .container div{
+        display: flex;
+        justify-content: center;
+        padding: 5% 10%;
+    }
+</style>
