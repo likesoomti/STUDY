@@ -1,15 +1,12 @@
 
+# Form Helper
 
-### ```form_tag([url_opts[,opts]]) ```
-
-#### Definition
+### form_tag([url_opts[,opts]]) 
 - 범용적인 입력 양식 헬퍼
-
 - 검색 키워드 또는 조건을 입력받는 양식들에 사용
-
 - csrf 방지 구성
 
-##### options
+#### options
 - ```method ``` : 입력 양식 전송
 - ```multipart``` : enctype 속성에 file upload 여부 사용
 - ```etc..``` : id, class 등등 기본 옵션  
@@ -32,10 +29,11 @@ id: :fm, class: :search) do %>
     <input type="submit" name="commit" value="search" data-disable-with="search"/>
 </form>
 ```
-#### 모델을 사용한 ```form_tag ```
+### 모델을 사용한 form_tag 
 
- 모델을 사용하는 경우, ```text_field_tag```가 아닌 ```text_field``` 태그를 사용한다.
-#### form _tag 순서 
+ 모델을 사용하는 경우, ```text_field_tag```가 아닌 ```text_field``` 태그를 사용
+ 
+#### form_tag 순서 
  - object name : ```book```
  - object value : ```isbn ```
  - other info : ```size : 25 ```
