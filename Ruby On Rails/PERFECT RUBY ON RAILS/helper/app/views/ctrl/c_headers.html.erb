@@ -1,0 +1,26 @@
+<h1>c_headers</h1>
+
+<p>request.headers</p>
+# => <%= request.headers %>
+
+<p>request.header[:Accept]</p>
+# => <%= request.headers[:Accept] %>
+
+<p>request.headers[:Accept-Language]</p>
+# => <% request.headers["Accept-Language"] %>
+
+<p>request.headers[:Authorization]</p>
+# => <%= request.headers[:Authorization] %>
+
+<p>request.headers[:Host]</p>
+# => <%= request.headers[:Host] %>
+
+<p>request.headers[:Referer]</p>
+# => <%= request.headers[:Referer] %>
+
+<p>request.headers[:User-Agent]</p>
+# => <% request.headers["User-Agent"] %>
+
+<p>request.headers["Content-Type"]</p>  
+
+# => <%= request.headers["Content-Type"] %>
