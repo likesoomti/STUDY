@@ -56,3 +56,5 @@ id: :fm, class: :search) do %>
     </div>
 <% end %>
 ```
+
+### form_for([url_opts[,opts]]) 
