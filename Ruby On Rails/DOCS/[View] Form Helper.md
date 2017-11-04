@@ -57,4 +57,28 @@ id: :fm, class: :search) do %>
 <% end %>
 ```
 
-### form_for([url_opts[,opts]]) 
+### form_for([url_opts[,opts]])  
+ 특정 모델을 편집할 수 있는 입력 양식 생성 
+
+###### view_controller
+ ```ruby
+def form_for
+    @book = Book.new
+end
+```
+###### form_for.html.erb
+ ```html
+<%= form_for(@post) do |form| %>
+ <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :post_title %>
+  </div>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, id: :post_content %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+  <% end %>
+ ```
