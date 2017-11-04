@@ -53,6 +53,16 @@ https://unsplash.com/
 ## DATA
 machine learning, deep learning, big data  등 데이터 자료모음
 
+###### [JTBC]냉장고를 부탁해 - 머신러닝 알고리즘을 활용한 각종 분석
+- http://jsideas.net/python/2015/07/07/fridge_please_final.html
+
+###### 머신러닝 초보를 위한 MNIST
+- https://codeonweb.com/entry/12045839-0aa9-4bad-8c7e-336b89401e10
+
+
+
+- http://whydsp.org/237
+
 - http://www.hellodatascience.com/?page_id=7
 - http://deepestdocs.readthedocs.io/en/latest/
 
@@ -192,7 +202,7 @@ machine learning, deep learning, big data  등 데이터 자료모음
 
 
 ## Ruby On Rails
-
+- http://api.rubyonrails.org/
 ###### devise
 - https://hcn1519.github.io/articles/2016-12/omniauth_devise_configuration
 
