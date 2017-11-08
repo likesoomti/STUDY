@@ -14,6 +14,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
+    @user = User.find(1)
     @post = Post.new
   end
 
