@@ -263,3 +263,60 @@ http.createServer(function(req,res){
 - `audio/mp3`
 
 content-type 이라고 명시하면 에러난다. 소문자 에러 주의 해야함
+
+### 3.3 쿠키 생성하기
+
+HTTP 쿠키는 `서버`가 `브라우저(chrome)`에 사용자의 데이터를 일정한 시간동안 저장해 놓아, 요청이 일어날 경우 브라우저에 있는 데이터를 활용한다. 
+
+- 보통 로그인 기능에 사용한다
+- 서버,클라이언트 둘 다 저장하고 사용할 수 있다
+ 
+
+
+#### 사용 방법
+쿠키에서 저장하는 목록은 여러개지만, 대표적으로 Name=Value 값을 받는다. 이에 다른 타입을 추가하고싶다면 세미콜론을 붙히고 설정을 해주면 된다.
+```html
+'Set-Cookie': ['Name = value']
+```
+
+#### 쿠키 생성하기 
+
+###### sample
+```javascript
+var http = require('http');
+
+http.createServer(function(req,res){
+
+    res.writeHead(200,{
+        'Content-Type' :'text/html',
+        // 쿠키 생성
+        'Set-Cookie':['breakfast = toast', 'dinner = chicken']
+
+        //Expires 내용 추가 시 
+        //'breakfast = toast;Expires ='+date.toUTCString()
+    });
+
+    res.end('<h1>'+req.headers.console+'</h1>');
+    
+}).listen(22222,function(){
+    console.log("Server Running start 22222 ")
+})
+```
+
+###### result 1
+처음 요청 시 쿠키를 갖지 않고 있어 `undefined` 출력 
+```javascript
+undefined
+```
+###### result 2
+새로고침시에는, 쿠키가 생성되어 있으므로 데이터 출력
+```javascirpt
+breakfast=toast; dinner=chicken
+```
+
+#### 쿠키 확인하기
+
+##### `개발자도구 > Application > cookie`
+
+##### 사진 
+![cookie](./img/cookie.png)
