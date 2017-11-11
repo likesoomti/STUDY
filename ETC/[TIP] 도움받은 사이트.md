@@ -1,6 +1,6 @@
 # TIP
 허접한 내 실력을 많이 도와줬던 유용한 사이트들 !
-스터디 취소된지 모르고 나왔다가 심심해서 정리중이당 
+스터디 취소된지 모르고 나왔다가 심심해서 정리중이당 (17.11.11 업데이트)
 
 (부족한 제 깃 구경 와주셔서 감사해여..)
 
@@ -13,6 +13,7 @@
 - https://www.hackerrank.com/
 - http://119.201.123.184/
 - https://www.acmicpc.net/
+- http://www.geeksforgeeks.org/
 
 ## Android
 - http://gun0912.tistory.com/3
@@ -90,6 +91,14 @@ machine learning, deep learning, big data  등 데이터 자료모음
 ###### git 삭제 
 - https://zetawiki.com/wiki/%ED%95%98%EC%9C%84_.git_%ED%8F%B4%EB%8D%94_%EB%AA%A8%EB%91%90_%EC%A0%9C%EA%B1%B0
 
+###### git markdown -> html 변환 사이트
+
+- https://cloudconvert.com/md-to-html
+
+
+
+## IOS
+- https://www.youtube.com/channel/UCScI4bsr-RaGdYSC2QAHWug/playlists
 
 
 
