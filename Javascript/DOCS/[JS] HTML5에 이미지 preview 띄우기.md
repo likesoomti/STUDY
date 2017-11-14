@@ -1,25 +1,29 @@
 # HTML5에 이미지 preview 띄우기
     
-`html5` 에서 이미지를 등록하고 `AWS S3`로 전송 하는걸 끝내고, 기본 정보를 수정시에  이미지를 선택하면 미리보기 창으로 띄워주고 싶어서  검색해보다 발견하였다!  
+`html5` 파일 이미지를 등록하고 확인버튼을 눌렀을 때, 파일 이름만 나오지 사진이 나오지 않는다 ㅠㅠ 미리보기를 띄워주고 싶을때는 자바스크립트를 사용해서 띄워줄 수 있다
 
 ##### html5 
-
 ```html
-    <!-- html5 -->
     <img id="user_image" src="#" alt="" >
-    <!-- 값이 변경되면 올려줌 -->
+    <!-- onchange event 걸어주기  -->
     <input accept=".jpg" onchange="PreviewImage();" type="file" name="user[profile_img]" id="user_profile_img" />
 ```
 ##### Javascript
 ```javascript
     function PreviewImage() {
-        // 파일리더 객체 생성 
+        // 파일리더 생성 
         var preview = new FileReader();
         preview.onload = function (e) {
-            // 로컬이미지 데이터화 
+            // img id 값 
             document.getElementById("user_image").src = e.target.result;
         };
-        // 파일 뿌려줌
+        // input id 값 
         preview.readAsDataURL(document.getElementById("user_profile_img").files[0]);
     };
 ```
+### Before
+![Alt text]( ../IMG/html_preview_before.png )
+
+### After
+
+![Alt text]( ../IMG/html_preview_after.png )
