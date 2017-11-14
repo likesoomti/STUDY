@@ -2,6 +2,11 @@
 
 **Facebook 연동하기 설명서** 
 
+## 결과 github
+https://github.com/likesoomti/facebook-devise-rails
+
+---
+## Get Started
 
 ### 1. Gemfile 설치
 ```
@@ -206,9 +211,6 @@ class SnsUser < ApplicationRecord
 end
 ```
 
-## example github
-
-https://github.com/likesoomti/facebook-devise-rails
 
 # facebook developer
 
