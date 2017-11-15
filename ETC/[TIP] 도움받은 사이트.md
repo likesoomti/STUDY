@@ -23,6 +23,12 @@
 
 - http://unikys.tistory.com/269
 
+## AWS
+
+##### aws ec2 php/linux/apache/php 빠른설치
+- http://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/install-LAMP.html
+
+
 ## design
 
 ##### color 
