@@ -1,7 +1,7 @@
 # MVC 디자인패턴을 이용한 트위터 스타일 애플리케이션 만들기
 
 
-## MVC 패턴
+### MVC 패턴
 
 `MVC`는 소프트웨어에서 사용되는 디자인 패턴이다. 사용자가 보는 `UI` 부분과, 보이지않는 `비즈니스 로직` 을 분리해서 영향없이 어플리케이션을 만들 수 있다. 
 
@@ -10,7 +10,7 @@ MVC에서
 - `뷰`는 체크박스,텍스트 항목 등과 같은 UI,
 - `컨트롤러`는 데이터와 비즈니스 로직 사이의 상호동작을 관리한다.
 
-## Express.js
+### Express.js
 
 `Node.js`에서 웹 및 모바일 어플리케이션을 만들수 있는 `프레임워크` 
 
@@ -38,12 +38,12 @@ $ npm install -g express
 $ npm install -g express-generator
 ```
 
-### Application Server 구축 
+### 서버 구축하기
 
-익스프레스와 미들웨어를 사용하여 어플리케이션 구축 
+익스프레스와 미들웨어를 사용하여 어플리케이션 구축한다 
 
-#### 미들웨어 (`Middle Ware`)
-미들웨어(`middleware`)는 응용 소프트웨어가 운영 체제로부터 제공받는 서비스 이외에 추가적으로 이용할 수 있는 라이브러리! 
+#### 미들웨어?? (`Middle Ware`)
+미들웨어(`middleware`)는 응용 소프트웨어가 운영 체제로부터 제공받는 서비스 이외에 추가적으로 이용할 수 있는 라이브러리를 말한다.
 
 ##### body-parser
 `Node.js` 에서 데이터를 post 요청 데이터를 보낼 수 있는 미들웨어 모듈 
@@ -66,7 +66,7 @@ $ express --ejs --css sass --git
 ```
 
 ###### result
-`--ejs` 명령어는 `--view=ejs` 로 바뀐듯하다
+`--ejs` 명령어는 `--view=ejs` 로 바뀐듯..!?
 ```
   warning: option `--ejs' has been renamed to `--view=ejs'
 
@@ -121,14 +121,13 @@ Usage: express [options] [dir]
 ### Express 가 만들어주는 폴더 구조
 Express 모듈을 통해 프로젝트 시작에 필요한 최소한의 구조를 만들어 주었다
 #### bin/www
-`서버 구동`을 위한 기본적인 코드로 구성되어있다. `app.js` 파일에서 `서버 설정`코드를 짜면, 그 코드를 가져와 HTTP 객체와 연동하는 작업을 해준다.
+`서버 구동`을 위한 기본적인 코드로 구성되어있다. `app.js` 파일에을 가져와 HTTP 객체와 연동하는 작업을 해준다.
 
 #### public
-UI 설정(html/js/css 관련)에 들어가는 assets들의 폴더와 파일들로 구성되어 있다
+UI 설정(html/js/css 관련)에 들어가는 assets들의 폴더와 파일들로 구성되어 있다.
 
 #### routes
 url 을 연결해서 로직과 연결해주는 파일
- 그 중 /routes/index.js 파일을 살펴 봅시다.
 
 #### view
 템플릿 `ejs` 파일이 담겨있다. `ejs` 엔진을 통해 html로 변환해 효율적으로 코드를 짤 수 있다
@@ -204,60 +203,4 @@ $ DEBUG=chapter-01:* npm start
   chapter-01:server Listening on port 3000 +0ms
 ```
 
-### 어플리 케이션 구조 변경
-블루프린트의 오타는 여기서부터 시작된다.. 
-
-#### 프로젝트 안에 폴더 & 폴더 만들기
-```
-chapter-01
-ㄴ server
-    - config
-    - routes
-    - views
-```
-#### 폴더 이동
-
-- `views` 폴더 파일 > `server/views` 이동
-- `routes` 폴더 파일 > `server/views` 이동
-
-#### app.js 변경
-
-폴더 파일 경로를 이동함으로써 변한 path를 맞춰주자..
-
-```javascript
-var index = require('./server/routes/index');
-var users = require('./server/routes/users');
-
-app.set('views', path.join(__dirname, 'server/views'));
-```
-
-### 기본 초기화 프로세스 수정해보기
-
-#### 1. app.js .set을 통해 시작할때 콘솔 로그 출력하기 
-
-```javascript
-
-// 서버 포트를 3000으로 설정 
-app.set('port',process.env.PORT || 3000);
-
-// 서버 포트 리슨을 받으면 console log 출력 
-var server = app.listen(app.get('port'),function(){
-  console.log('Express server listening on port'+ server.address().port);
-})
-```
-
-#### package.json 변경으로 명령어 변경 실행
-
-##### package.json
-```json
-//before
-"scripts": {
-    "start": "node ./bin/www"
-  }
-
-// after
-"scripts": {
-    "start": "node app.js"
-  }
-```
-으로 바꿔주면 `DEBUG=chapter-01:* npm start` 를 안쓰고, `node app.js`를 통해 서버를 시작할 수 있다
+기본 어플리케이션 설정이 완료되었다. 이걸 토대로 트위터 스타일 어플리케이션을 구축해보자.
