@@ -1,5 +1,4 @@
-# MVC 디자인패턴을 이용한 트위터 스타일 애플리케이션 만들기
-
+# MVC 디자인패턴을 이용한 트위터 스타일 애플리케이션 만들기 - 1
 
 ### MVC 패턴
 
@@ -38,20 +37,72 @@ $ npm install -g express
 $ npm install -g express-generator
 ```
 
-### 서버 구축하기
 
-익스프레스와 미들웨어를 사용하여 어플리케이션 구축한다 
-
-#### 미들웨어?? (`Middle Ware`)
+### 미들웨어 (`Middle Ware`)
 미들웨어(`middleware`)는 응용 소프트웨어가 운영 체제로부터 제공받는 서비스 이외에 추가적으로 이용할 수 있는 라이브러리를 말한다.
 
-##### body-parser
+#### body-parser
 `Node.js` 에서 데이터를 post 요청 데이터를 보낼 수 있는 미들웨어 모듈 
 `req.body` property 속성이 부여된다.
-##### cookie-parser
+#### cookie-parser
 `Node.js` 에 쿠키를 사용하기 위한  미들웨어 모듈 
 `req.cookie` property 를 사용할 수 있다
 
+#### gravator
+
+Global+Recoginze+Avator
+프로필을 업로드하면, 그라바타를 사용하는 사이트에 이미지가 자동으로 업로드되는 모듈 
+- https://www.npmjs.com/package/gravatar
+
+
+#### connect-flash
+
+일회성 메세지. 한번 보내고 나면 사라진다.
+
+- https://m.blog.naver.com/PostView.nhn?blogId=rwans0397&logNo=220680181786&proxyReferer=https:%2F%2Fwww.google.co.kr%2F
+
+
+#### mongoose
+
+MongoDB 기반 ODM(Object Data Mapping). Rails의 ActiveRecord 인듯하다.MongoDB의 데이터를 Javascript 객체 기반으로 활용할 수 있다
+
+- https://velopert.com/594
+
+#### express-session
+
+ 세션 데이터를 서버에 저장한다. 쿠키에는 데이터가 아닌 ID를 저장하여 Id를 가지고 사용한다.develop 모드에서 사용하는 듯..?
+ - http://expressjs.com/ko/advanced/best-practice-security.html
+
+#### connect-mongo
+
+몽고 DB - Node.js 연결해주는 드라이버 
+- https://www.npmjs.com/package/connect-mongodb
+#### bcypt-nodejs
+패스워드를 암호화 해주는 모듈 
+- https://www.npmjs.com/package/bcrypt-nodejs
+
+#### passport 
+
+node.js용 범용 인증 모듈로, 다양한 인증 프로토콜을 지원한다.(HTTP Basic Auth, HTTP digest authentication, OAuth,OpenID)
+로그인 쉽게 가능! 
+
+passport는 Strategy(전략)이라는 것을 사용하여 인증을 실행한다.
+- http://bcho.tistory.com/920 
+
+#### passport-local
+
+passport 인증 모듈에서 로컬 유저/패스워드를 인증해주는 모듈 
+
+- https://www.zerocho.com/category/NodeJS/post/57b7101ecfbef617003bf457
+
+### 모듈 설치
+
+##### terminal
+
+```
+$ npm install connect-flash connect-mongo mongoose express-session gravatar bcrypt-nodejs passport passport-local --save
+```
+### 서버 구축하기 
 #### 1. 폴더 만들기
 ```
 chapter-01 
@@ -203,4 +254,42 @@ $ DEBUG=chapter-01:* npm start
   chapter-01:server Listening on port 3000 +0ms
 ```
 
-기본 어플리케이션 설정이 완료되었다. 이걸 토대로 트위터 스타일 어플리케이션을 구축해보자.
+#### app.js 
+
+
+```javascript
+// 라우트 경로 설정시  
+var index = require('./server/routes/index');
+var users = require('./server/routes/users');
+
+// 뷰 엔진 설정 
+app.set('views', path.join(__dirname, 'server/views'));
+```
+
+#### 서버 콘솔 출력  
+
+```javascript
+// 서버 포트를 3000으로 설정 
+app.set('port',process.env.PORT || 3000);
+
+// 서버 포트 리슨을 받으면 console log 출력 
+var server = app.listen(app.get('port'),function(){
+  console.log('Express server listening on port'+ server.address().port);
+})
+```
+
+#### package.json 변경으로 명령어 변경 실행
+
+##### package.json
+```json
+//before
+"scripts": {
+    "start": "node ./bin/www"
+  }
+
+// after
+"scripts": {
+    "start": "node app.js"
+  }
+```
+으로 바꿔주면 `DEBUG=chapter-01:* npm start` 를 안쓰고, `node app.js`를 통해 서버를 시작할 수 있다
