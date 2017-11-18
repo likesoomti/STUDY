@@ -1,6 +1,4 @@
-# AWS Deploy template
-
-하루동안 개고생.. 정리하기 왜냐면 까먹으면또 지옥의 시작이니까 
+# LAMP Template AWS Deploy 
 
 ## 1.aws marketplace
 
