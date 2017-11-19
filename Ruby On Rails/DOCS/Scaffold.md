@@ -171,3 +171,5 @@ end
 - https://rubykr.github.io/rails_guides/getting_started.html#Getting-Up-and-Running-Quickly-with-Scaffolding
 
 - https://dayone.me/1ajvzWC
+
+- https://github.com/likesoomti/overlap_scaffold-1
