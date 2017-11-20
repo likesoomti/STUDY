@@ -233,4 +233,145 @@ module.exports = router;
 
 ### 5. Controller 만들기 
 
-##### chapter-01/controller 폴더 생성 , comment.js 추가 
+##### chapter-01/controller 폴더 생성 , comment.js 추가
+
+```javascript
+//모듈 추가 
+var gravatar = require('gravatar');
+
+// 모델 추가 
+var Comments = require('../models/comments');
+
+// 코멘트 리스트 만들기 
+exports.list = function(req, res) {
+    Comments.find().sort('-created').populate('user', 'local.email').exec(function(error, comments) {
+        if (error) {
+            return res.send(400, {
+                message: error
+            });
+        }
+        //렌더링 결과 
+        res.render('comments', {
+            title: 'Comments Page',
+            comments: comments,
+            gravatar: gravatar.url(comments.email ,  {s: '80', r: 'x', d: 'retro'}, true)
+        });
+    });
+};
+// 커멘트 생성 
+exports.create = function(req, res) {
+    // 인스턴스 생성
+    var comments = new Comments(req.body);
+
+    comments.user = req.user;
+    comments.save(function(error) {
+        if (error) {
+            return res.send(400, {
+                message: error
+            });
+        }
+        // Redirect to comments
+        res.redirect('/comments');
+    });
+};
+exports.hasAuthorization = function(req, res, next) {
+	if (req.isAuthenticated())
+        return next();
+    res.redirect('/login');
+};
+``` 
+
+##### app.js
+require 인증 해주는 부분에 추가해준다
+```javascript
+//코멘트 추가
+var comments = require('./server/controllers/comments');
+```
+app.use('/users',users) 뒷 부분에 추가
+
+```javascript
+app.get('/comments',comments.hasAuthorization, comments.list)
+app.post('/comments',comments.hasAuthorization,comments.create)
+```
+
+##### server/views/pages에 comment.ejs 파일 만들기 
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <% include ../partials/stylesheet %>
+</head>
+<body>
+    <% include ../partials/header %>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 class="text-muted">Comments</h4>
+            </div>
+            <div class="col-lg-6">
+                <button type="button" class="btn btn-secondary pull-right" data-toggle="modal" data-target="#createPost">
+                    Create Comment
+                </button>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="createPost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form action="/comments" method="post">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">Create Comment</h4>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <fieldset class="form-group">
+                                <label  for="inputitle">Title</label>
+                                <input type="text" id="inputitle" name="title" class="form-control" placeholder="Comment Title" required="">
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label  for="inputContent">Content</label>
+                                <textarea id="inputContent" name="content" rows="8" cols="40" class="form-control" placeholder="Comment Description" required=""></textarea>
+                            </fieldset>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="lead">
+            <div class="list-group">
+            <% comments.forEach(function(comments){ %>
+                    <a href="#" class="list-group-item">
+                        <img src="<%= gravatar %>" alt="" style="float: left; margin-right: 10px">
+                        <div class="comments">
+                            <h4 class="list-group-item-heading"><%= comments.title %></h4>
+                            <p class="list-group-item-text"><%= comments.content %></p>
+                            <small class="text-muted">By: <%= comments.user.local.email %></small>
+                        </div>
+                    </a>
+            <% }); %>
+            </div>
+        </div>
+        </div>
+        <% include ../partials/footer %>
+        <% include ../partials/javascript %>
+    </body>
+    </html>
+```
+
+### 실행하기
+
+```
+npm start
+```
