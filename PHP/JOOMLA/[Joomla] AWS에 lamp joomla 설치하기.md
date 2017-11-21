@@ -56,16 +56,10 @@ Document root 를 변경 해준다
 ```
 
 ### 8. 재부팅 
-아쉽게도, 이유는 모르겠지만
-`sudo service apache2`가 작동이 안된다. (service is not recoginzed)
 
-그래서 apache2를 reinstall을 하자 bitnami.conf 가 와장창 사라져 망했다...
-
-재부팅 명령어는 찾아서 다해봐도 안됨...
-무식하게 인스턴트를 재부팅 해줫따...ㅎㅎ..해결방법 아시는분들은 꼭 알려주세요.. 
-
-무식하게 인스턴스를 재부팅하면 joomla 가입 페이지가 나온다. 스무스하게 따라가면 된다.
-
+```
+sudo /opt/bitnami/ctlscript.sh restart
+```
 
 ### 9. 줌라가입 설정
 
