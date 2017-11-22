@@ -6,7 +6,7 @@ html 로 무한스크롤을 만드는데 , 전체 페이지를 스크롤 시 고
 
 ## Image
 분홍색이 고정되어있는 layout 이고 그 중간에 페이지가 스크롤링 되는 정도 
-![Alt text](../IMG/html_Infinite_scroll.png)
+![Alt text](../IMG/html_Infinite_Scroll.png)
 ## Solve
 
 ```javascript
