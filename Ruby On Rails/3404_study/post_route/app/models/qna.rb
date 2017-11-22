@@ -1,0 +1,2 @@
+class Qna < ApplicationRecord
+end

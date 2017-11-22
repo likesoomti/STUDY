@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Qnas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @qnas.each do |qna| %>
+      <tr>
+        <td><%= qna.title %></td>
+        <td><%= qna.content %></td>
+        <td><%= link_to 'Show', qna %></td>
+        <td><%= link_to 'Edit', edit_qna_path(qna) %></td>
+        <td><%= link_to 'Destroy', qna, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Qna', new_qna_path %>
