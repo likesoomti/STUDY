@@ -229,6 +229,8 @@ http://earlybird.kr/1584
 
 - https://stackoverflow.com/questions/12719541/css-loading-locally-but-not-in-heroku-for-a-rails-app
 
+###### ENUM Class
+- https://withrails.com/2015/07/13/activerecordenum-%EB%8D%B0%EC%9D%B4%ED%84%B0%ED%98%95%EC%9D%98-%ED%99%9C%EC%9A%A9-2/
 
 
 ## web ide
