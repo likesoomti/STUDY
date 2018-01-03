@@ -10,6 +10,9 @@
 ```
 $ rails g model 모델이름 컬럼이름:타입
 ```
+
+기본 컬럼 설정은 `이름:type` 이지만, `type`이 문자열일 경우 `default` 값이 `string`이므로 생략해줘도 됩니다. 
+
 ###### example
 ```
 $ rails g model post title:string content:text
@@ -32,6 +35,14 @@ $ rails db:migrate
 ```
 $ rails db:drop
 ```
+
+#### 컬럼 포함 생성
+생성시 컬럼이름:타입명 으로 바꿔주는데, 이때 컬럼 이름만 쓰면 타입은 default 로 string 형이 된다.
+```
+Rails g scaffold point score:integer description
+```
+
+
 
 ### seed 생성하기
 **seed**는 데이터베이스에 정보를 미리 저장할 수 있습니다. test를 위해 더미 값을 등록하거나, 미리 존재하는 정보들을 넣을 때 사용합니다.
