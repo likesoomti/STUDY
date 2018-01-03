@@ -166,7 +166,6 @@ var flash = require('connect-flash');
 ```
 
 #### 5. 익스프레스 app 시작
-
 ```javascript
 var app = express();
 ```
@@ -367,24 +366,26 @@ exports.show = function(req, res) {
 ```javascript
 // Import modules
 var fs = require('fs');
-var mime = require('mime');
-// get gravatar icon from email
-var gravatar = require('gravatar');
+//  mime type 사용,. 
 
+//  데이터를 웹 서버는 바이트의 Stream을 보내는데, 자원의 content type 또한 포함해서 보낸다. 이것이 Content-Type 하지만 이미지는 media type으로 mime type 을지정해서 보낸다.
+var mime = require('mime');
+var gravatar = require('gravatar');
+// 이미지 모델 설정 
 var Images = require('../models/images');
-// set image file types
+// 이미지 타입 지정
 var IMAGE_TYPES = ['image/jpeg','image/jpg', 'image/png'];
 
-// Show images gallery
 exports.show = function (req, res) {
 
+    // show page 만들어진 순으로 정렬한다.
     Images.find().sort('-created').populate('user', 'local.email').exec(function(error, images) {
         if (error) {
             return res.status(400).send({
                 message: error
             });
         }
-        // REnder galley
+        // 정렬된 값을 렌더링 
         res.render('images-gallery', {
             title: 'Images Gallery',
             images: images,
@@ -393,7 +394,7 @@ exports.show = function (req, res) {
     });
 };
 
-// Image upload
+// 이미지 업로드시 
 exports.uploadImage = function(req, res) {
     var src;
     var dest;
@@ -401,18 +402,24 @@ exports.uploadImage = function(req, res) {
     var targetName;
     var tempPath = req.file.path;
     console.log(req.file);
-    //get the mime type of the file
+    // 업로드 요청받은 파일 확장자 리턴 
     var type = mime.lookup(req.file.mimetype);
-    // get file extension
+
     var extension = req.file.path.split(/[. ]+/).pop();
+    // 이미지 확장자 체크. not == -1 
     if (IMAGE_TYPES.indexOf(type) == -1) {
         return res.status(415).send('Supported image formats: jpeg, jpg, jpe, png.');
     }
+    // 파일 경로 지정 
     targetPath = './public/images/' + req.file.originalname;
+    // 파일을 읽어들임 
     src = fs.createReadStream(tempPath);
+    // 파일 경로에 파일을 씀
     dest = fs.createWriteStream(targetPath);
-    src.pipe(dest);
 
+    // 입력 받은 값을 목적지에 출력해준다...?
+    src.pipe(dest);
+    // 에러나면 메세지보내주기 
     src.on('error', function(err) {
         if (err) {
             return res.status(500).send({
@@ -617,3 +624,4 @@ chapter-01과 같은 파일을 생성한다. chapter-01 참조하기
 - http://bcho.tistory.com/887 
 - http://avilos.codes/server/nodejs/node-js-path%EB%AA%A8%EB%93%88/
 - http://blog.jeonghwan.net/%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C-1-multer-%EB%AA%A8%EB%93%88%EB%A1%9C-%ED%8C%8C%EC%9D%BC-%EC%97%85%EB%A1%9C%EB%93%9C/
+- http://www.webmadang.net/community/community.do?action=read&boardid=5001&page=1&seq=3
