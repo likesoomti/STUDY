@@ -8,3 +8,9 @@
 ```ruby
   Person.exists?(:name => "David")
 ```
+
+## error detail log 확인 
+
+```ruby
+  Person.errors.messages # => {}
+```
