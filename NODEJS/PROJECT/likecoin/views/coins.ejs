@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%=title%></title>
+</head>
+<body>
+    <div>
+        <div>
+            <div>
+                <h4>COIN</h4>
+            </div>
+            <div>
+                <form action="/coins" method="post">
+                    <h2> 코인 등록</h2>
+                        <label>Coinname</label>
+                        <input type="text" id="coinname" name="coinname" placeholder="CoinName" required="">
+                        
+                        <label>price</label>
+                        <input type="text" id="price" name="price" placeholder="price" required="">
+                    
+                        <label>Category</label>
+                        <input type="text" id="category" name="category" placeholder="category" required="">
+                   
+                        <label>Deposit</label>
+                        <input type="text" id="deposit" name="deposit" placeholder="deposit" required="">
+                   
+                        <button class="" type="submit">코인 등록</button>
+                    <br>
+                    
+                </form>
+            </div>
+        </div>
+      
+        <hr>
+        <div>
+            <div>
+            <% coins.forEach(function(coins){ %>
+                        <div>
+                            <h4>Coinname: <%= coins.coinname %></h4>
+                            <p>Category: <%= coins.category %></p>
+                            <p>By: <%= coins.price %></p>
+                        </div>
+                    </a>
+            <% }); %>
+            </div>
+        </div>
+        </div>
+    </body>
+    </html>

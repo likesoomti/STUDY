@@ -1,23 +1,27 @@
-// 몽고 디비 연결 
+// Import Mongoose and password Encrypt
 var mongoose = require('mongoose');
-// 암호화 모듈 생성 
 var bcrypt   = require('bcrypt-nodejs');
-// 유저 스키마 만들기 
+
+// define the schema for User model
 var userSchema = mongoose.Schema({
+    // Using local for Local Strategy Passport
     local: {
+        name: String,
         email: String,
-        password: String
+        password: String,
     }
+
 });
 
-userSchema.method.createlist = function(user,password){
-    
-}
-// 유저 암호화 모듈 메소드 
+// Encrypt Password
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
+
+// Verify if password is valid
 userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
+
+// create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);
