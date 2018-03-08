@@ -103,8 +103,19 @@ $ vi Gemfile
 
 ```
 
+
+
 ```bash
 $ gem install passenger
+$ git clone git://github.com/dcarley/rbenv-sudo.git ~/.rbenv/plugins/rbenv-sudo
+$ sudo dd if=/dev/zero of=/swap bs=1M count=1024
+$ sudo mkswap /swap
+$ sudo swapon /swap
+
+$ rbenv sudo passenger-install-nginx-module
+$ ruby
+$ 1
+
 $ bundle install --without development test 
 $ bundle exec figaro install 
 $ echo "production:" >> ./config/application.yml 
