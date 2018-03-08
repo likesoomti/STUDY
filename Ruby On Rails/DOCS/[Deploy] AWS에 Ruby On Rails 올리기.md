@@ -348,4 +348,45 @@ $ sudo /opt/nginx/sbin/nginx
 
 이렇게 배포를 하면 사실 development 모드이기 때문에 배포하면 큰일난다. 막 rails/db 다 들어가지고 난리남.
 
-production 배포 모드는 차후에 올리겠음.
+## 여기서 production 모드로 변경하기
+
+```bash
+$ sudo vi /opt/nginx/conf/nginx.conf
+```
+
+##### server
+
+```bash
+  server {
+    listen 80;
+    passenger_enabled on;
+    rails_env production;
+    root /home/ubuntu/ ‘내프로젝트폴더이름’/public; }
+```
+
+##### 서버 시작
+
+```bash
+$ sudo fuser -k 80/tcp
+$ sudo /opt/nginx/sbin/nginx
+```
+
+##### production 모드
+
+```bash
+$ bundle install --without development test 
+$ bundle exec figaro install 
+$ echo "production:" >> ./config/application.yml 
+$ echo "SECRET_KEY_BASE: $(bundle exec rake secret RAILS_ENV=production)" >> ./config/application.yml 
+$ cd ..
+```
+
+```bash
+$ bundle exec rake db:create RAILS_ENV=production
+$ bundle exec rake db:migrate RAILS_ENV=production
+$ bundle exec rake assets:precompile RAILS_ENV=production
+```
+
+
+
+이렇게 변경함으로서 db를 보존하고싶었지만 안됏다 이건 찾아봐야될것같다. ㅠㅠ 저 마지막 create 때문인지 싶지만..
