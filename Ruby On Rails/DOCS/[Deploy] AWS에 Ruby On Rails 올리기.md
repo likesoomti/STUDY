@@ -389,4 +389,4 @@ $ bundle exec rake assets:precompile RAILS_ENV=production
 
 
 
-이렇게 변경함으로서 db를 보존하고싶었지만 안됏다 이건 찾아봐야될것같다. ㅠㅠ 저 마지막 create 때문인지 싶지만..
+이렇게 변경함으로서 db를 보존하고싶었지만 실패 

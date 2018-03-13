@@ -103,8 +103,6 @@ $ vi Gemfile
 
 ```
 
-
-
 ```bash
 $ gem install passenger
 $ git clone git://github.com/dcarley/rbenv-sudo.git ~/.rbenv/plugins/rbenv-sudo
@@ -129,11 +127,23 @@ $ bundle exec rake db:migrate RAILS_ENV=production
 $ bundle exec rake assets:precompile RAILS_ENV=production
 ```
 
-
-
-##### mysql쓰거나 imagemagick 쓸때
-
 ```bash
-$ sudo apt-get install  mysql-server mysql-client libmysqlclient-dev imagemagick
+$ sudo vi /opt/nginx/conf/nginx.conf
 ```
 
+```bash
+  server {
+    listen 80;
+    passenger_enabled on;
+    rails_env production;
+    root /home/ubuntu/ ‘내프로젝트폴더이름’/public; }
+```
+
+##### 서버 시작
+
+```bash
+$ sudo fuser -k 80/tcp
+$ sudo /opt/nginx/sbin/nginx
+```
+
+##### 
