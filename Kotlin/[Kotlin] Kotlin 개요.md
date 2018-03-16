@@ -86,7 +86,7 @@ view.setOnClickListener {
 
 자바 8은 안드로이드 버전 6.0 이상 사용하는 플랫폼에서만 `API` 를 사용할 수 있다는 제약이 있지만, 코틀린은 유사한 역할 함수들을 코틀린 표준 라이브러리를 통해 제공해서 버전에 상관없이 사용할 수 있다.
 
-##### 스트림 api 가 뭐지 ? -> likesoomti.github.com
+##### 스트림 api 가 뭐지 ? -> https://github.com/likesoomti/STUDY/blob/master/Kotlin/%5Bbasic%5DStream%20%EA%B3%BC%20Stream%20API.md
 
 
 
