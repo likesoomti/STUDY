@@ -151,3 +151,126 @@ PhoneNumber phoneString // worse
 ### 10. 기발한 이름은 피해라 
 
 - 특정 문화에서만 사용하는건 재밌지만, 피해라. 의도를 분명히 하고 솔직하게 표현하는게 좋다.
+
+### 11. 한 개념에 한 단어를 사용하라
+
+- 추상적인 개념에 단어 하나를 선택해 하나를 고수하라. 
+- 메서드 이름은 독자적이고,일관적이여야 주석을 보지 않고도 올바른 메서드를 선택할 수 있다.
+- 동일 코드에 controller,manager,driver 을 쓰면 혼란스럽다. 일관성 있는 어휘코드를 쓰자
+
+### 12. 말장난을 하지 마라
+
+- 위와 모순적일수 있지만, 비슷한 기능이지만, 같은 맥락이 아니면 다른 단어를 사용하자
+- add 라 불리우는 메서드는 항상 2개를 더하거나 새로운 값을 만든다고 가정
+- 새로 만드는 메서드는 집합에 값 하나를 추가하는 메서드.
+- add 의 의미는 통하지만, 이전 add 메서드와 맥락이다름. 이런 메서드는 다른 유의어를 사용하자 
+
+### 13. 해법 영역에서 가져온 이름을 사용해라.
+
+- 코드를 읽는 사람도 프로그래머이다. 
+- 모든 이름을 문제 영역에서 가져오는것은 현명하지 못하다.
+- 기술 개념에는 기술 이름이 가장 적합하다. 
+
+### 14. 문제 영역에서 가져온 이름을 사용해라
+
+- 적절한 용어가 없을시에는, 문제 영역에서 이름을 가져오면 전문가에게 의미를 물어 파악할 수 있다.
+- 해법 영역과 문제 영역을 구분할 줄 알아야한다.
+- 문제영역 : 클라이언트가 원하는 문제인듯..? (마켓컬리 닭가슴살 내역) 해법:(모델에 데이터를 빼오는 방법)
+
+### 15. 의미있는 맥락을 추가해라.
+
+- 스스로 의미가 분명한 이름은 별로 없다
+
+- 따라서 클래스,함수,이름에 공간을 넣어 맥락을 부여한다
+
+- 모두 별로면 접두어를 붙힌다.
+
+  ###### example
+
+  - `firstName` 만 있으면 뭔지모름
+  - `firstName` `lastName` `street` `houseNumber` `city` `state` `zipcode` 이 있으면 맥락 오케이
+
+- 접두어를 추가해  `addFirstName` 이라고 지칭되면 구조적 부분도 알려줄 수 있다.
+
+##### 맥락이 불분명한 변수
+
+###### example
+
+함수 이름이 일부 맥락만 제공하고, 알고리즘이 나머지 맥락을 제공하는데, 메서드만 훑어서는 세 변수의 의미가 불분명하다.
+
+```java
+private void printGuessStatistics(char candidate, int count){
+ String number;
+ String verb;
+ String pluralModifier;
+  
+  if(count==0){
+    number="no";
+    verb = "are";
+    pluralModifier ="s"
+  }else if( count ==1){
+    number = "1";
+    verb ="is";
+    pluralModifier = "";
+  }else{
+    number = Integer.toString(count);
+    verb = "are";
+    pluralModifier = "s";
+  }
+  
+  String guessMessage = String.format(
+  " There is %s %s %s",verb,number,candidate,pluralModifier
+  );
+  
+  print(guessMessage)
+}
+```
+
+함수가 기니, 작은 조각으로 쪼갰다.
+
+세 변수를 클래스에 넣어, 만들면 변수의 맥락이 분명해진다.
+
+
+
+##### 맥락이 분명해진 변수
+
+```java
+public class GuessStaticsMessage {
+  // 클래스에 변수를 속하게 함으로서 확실하게 
+  String number;
+  String verb;
+  String pluralModifier;
+  
+  // 함수를 쪼개 잘 보이게 한다.
+  public String make(char candidate, int count){
+  	createPluralDependentMesssageParts(count);
+    return String.format(
+    " There is %s %s %s",verb,number,candidate,pluralModifier
+    );
+  }
+  private void createPluralDependentMesssageParts(int count){
+    if(count==0){
+      number="no";
+      verb = "are";
+      pluralModifier ="s"
+    }else if( count ==1){
+      number = "1";
+      verb ="is";
+      pluralModifier = "";
+    }else{
+      number = Integer.toString(count);
+      verb = "are";
+      pluralModifier = "s";
+    }
+  }
+}
+
+```
+
+### 16. 불필요한 맥락을 없애라
+
+- 맥락을 분명하게 한다고 해서 다 열거하는건 불필요하다
+- 고급 휘발유 충전소라는 어플을 만든다고해서 , 모든 클래스 이름을 GSD로 하면 안된다.
+- 검색했을때 다나오쟈나.
+- 의미가 분명한 경우 짧은 이름이 훨씬 좋다
+- ​
