@@ -50,6 +50,24 @@ fun sum(a:Int,b:Int) = a+b
 - Singleton object. 아무것도 안쓰면 디폴트로 Unit 으로 적용된다.
 
 
+코틀린에서는 자바 클래스 내 메서드를 함수로 표현합니다.
+
+###### example
+
+```kotlin
+class Foo {
+  fun foo(): Unit {
+    
+  }
+  
+  private fun bar() : Int {
+    return 0
+  }
+}
+```
+
+
+
 
 ## 변수 정의
 
@@ -244,3 +262,48 @@ items
 
 
 - val items = listOf("apple",banana,kiwi)
+
+
+
+### 자료형 / 자료형 확인 및 반환
+
+
+
+##### ==
+
+코틀린에서는 객체냐,값이냐를 구분할 필요없이 모두 == 연산자를 사용합니다.
+
+값이 동일한지 여부를 확인합니다.
+
+널 여부를 함께 확인합니다.
+
+
+
+##### ===
+
+동일한 객체인지 확인합니다.
+
+
+
+##### is
+
+코틀린에서는 자료형을 확인하기 위해 is 연산자를 사용합니다.
+
+###### example
+
+```kotlin
+if(obj is Int)
+```
+
+##### as
+
+자료형을 변환할 수 있는 연산자 입니다.
+
+###### example
+
+```kotlin
+fun processNumber(number :Number){
+  val foo : Int = number as Int
+}
+```
+
