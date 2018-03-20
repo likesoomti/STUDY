@@ -116,6 +116,41 @@ for((index,value) in array.withIndex()){
 
 ```
 
+### Range
+
+`range`는 코틀린에만 있는 독특한 구조입니다.
+
+해당 범위 내에 특정 항목이 포함되어 있는지 확인할 때 사용합니다.
+
+ `..` 연산자를 사용하여 정의합니다.
+
+인덱스 순환을 위한 범위를 생성하는 경우에는 until 함수를 사용하면 마지막 값을 포함하지 않은 범위를 생성합니다.
+
+범위 내에 특정 항목이 있는지 알고싶다면 in 을 사용합니다.
+
+항목들 순서가 반대로 정렬된 범위를 생성하려면 `downTo()` 함수를 사용합니다.
+
+감소폭의 default 는 1이지만, `step()` 함수를 사용하면 감소폭을 조정할 수 있습니다.
+
+###### example
+
+```kotlin
+val myRange : IntRange = 0..3 // (0,1,2,3)
+val untilRange : IntRange = 0 until 4 (0,1,2,3)
+
+// in 사용하기
+// 5가 myRange 에 있는지 확인한다.
+val foo : Boolean = 5 in myRange
+
+// downTo() -> 54321 순으로 간다.
+for (i in 5 downTo 1){}
+
+// 531 출력
+for (i in 5 downTo 1 step 2){}
+```
+
+
+
 ### while Loops
 
 `while`, `do - while` 은 자바와 같습니다.
