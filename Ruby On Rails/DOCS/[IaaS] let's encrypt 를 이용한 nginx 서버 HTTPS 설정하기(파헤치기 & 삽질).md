@@ -80,9 +80,19 @@ ssl 인증을 받으려고 엄청 삽질을 했다ㅠㅠ
 
 저 문서는 ruby 설치부터 되어있는데 , 나는 예전에 정리한 밑의 부분으로 하기 때문에, 
 
-https://github.com/likesoomti/STUDY/blob/master/Ruby%20On%20Rails/DOCS/%5BDeploy%5D%20Production%20%EB%B0%B0%ED%8F%AC%20%EB%B3%B5%EB%B6%99%EC%9A%A9.md
 
-설치부터 시작하는 분들이 있다면 윗 부분을 참고하고 따라와 주세요 :) 
+
+**[IaaS] rails nginx deploy - production (복붙용)**
+
+이후에 시작한 내용이다.
+
+설치 부터 시작하는 사람들은 
+
+https://github.com/likesoomti/STUDY/tree/master/Ruby%20On%20Rails/DOCS
+
+에서 저 제목의 문서를 참고하면 좋을것 같다 :-)
+
+
 
 ##### nginx 설치
 

@@ -1,6 +1,6 @@
 
 
-# [Deploy] Ruby On Rails 배포하기 production (복붙용).md
+# [IaaS] rails nginx deploy - production (복붙용)
 
 나중에 편하게 하려고 정리. (많이 썻는데 최고다. pdf 파일로 정리하면 복붙 구려지는데 깃헙짱!)
 
