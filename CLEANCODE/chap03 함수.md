@@ -224,3 +224,221 @@ public Money calculatePay(Employee e)
 - 길고 서술적인 이름이 긴 주석보다 훨 낫다.
 - 이름을 붙일 때는 일관성이 있어야 한다.
 - 모듈 내 함수 이름은 같은 문구/명사/동사를 사용한다.
+
+
+
+### 6. 함수 인수
+
+- 함수의 인수는 적을수록 좋다 
+- 3,4개의 인수는 피하는 것이 좋다 ( 차라리 클래스를 만들어라 )
+- 인수가 많으면 개념을 이해하기 어려어진다.
+- 코드를 읽을때는 `includeSetupPageIntoo(new PageContent)` 보다 `includeSetupPage()`가 쉽다.
+
+
+
+##### 많이 쓰는 단항 형식
+
+*함수 인수 1개를 넘기는 이유*
+
+1. 질문을 던지는 경우 (`boolean fileExists("myFile")`)
+2. 인수를 뭔가로 변환해 반환하는 경우 
+3. 이벤트 함수
+
+이름을 지을때는 두 경우를 분명히 구분해라.
+
+또한 명령과 조회를 분리해라!
+
+이벤트 함수는 이름과 문맥을 신중히 선택해야한다.
+
+한가지만 해라! (변환 함수에서 출력 하지말고, 변환만 할 것)
+
+
+
+*플래그 인수*
+
+- 개추함 쓰지마욧 
+- 함수가 한꺼번에 처리한다는 뜻임. 분리해라
+
+
+
+*이항 함수*
+
+이항함수가 적절한 경우 - 좌표코드 
+
+###### example
+
+```java
+Point p = new Point(0,0) // 근데 두개가 한 값을 표현하는 경우임!
+```
+
+이항 함수를 쓰는 것 보다, 클래스 구성원으로 만들어 함수로 호출하는 것이 낫다.
+
+###### example
+
+```java
+void writeField(outputStream,name) // x
+void outputStrea.writeField(name) // o
+
+```
+
+*삼항 함수*
+
+- 신중히 고려해라. 함수 볼때마다 순서를 기억하는게 주춤하게 되고 구리다.
+
+*인수 객체*
+
+- 인수가 2~3개가 필요하면 독자적인 클래스 변수로 선언하여, 객체를 생성해 인수를 줄이자.
+
+*인수 목록*
+
+- 가변 인수는 동등하게 취급하자.
+
+###### example
+
+```java
+ void dyad(String name, Integer… args) //인수 2개 
+```
+
+*동사와 키워드*
+
+- 순서와 의도를 제대로 표현하기 위해 동사/명사 쌍을 이루게 만들자
+- 키워드를 붙혀 순서를 기억하기 쉽게 만들자
+
+###### example
+
+```java
+String write(name) // 이해 쉬움
+String writeField(name) //better 
+String assertExpectedEqualsActual(expected,actual) // 키워드를 붙혀 인수 순서 기억할 필요없음!
+```
+
+
+
+*부수 효과를 일으키지마라*
+
+- 함수에서는 한가지만 해라
+- 여러가지를 해결하려 하면, 시간적인 결합이나 순서 종속성을 초래한다.
+
+*출력 인수*
+
+- 우리는 인수를 함수 입력으로 생각하는데, 출력 인수로 사용할 경우 또한 있다.
+- 객체 지향 언어에서는 출력 인수로 사용하려고 `this` 를 설계했다.
+- 일반적으로 출력 인수는 피하자.
+
+###### example
+
+```java
+public void appendFooter(StringBuffer report)
+appendFooter(s) //x
+report.appendFooter() // o
+```
+
+
+
+### 7. 명령과 조회를 분리하라!
+
+- 함수는 하나만 해야한다.
+- 객체상태를 변경하거나 , 반환하거나 둘중 하나만 하자.
+- 명령과 조회를 분리해 만들자.
+
+
+
+### 8. 오류 코드보다 예외를 사용해라.
+
+- 오류 코드 반환 방식은 ocp 규칙위반.
+- 오류 코드 대신 예외를 사용하면 오류 처리 코드가 분리되므로, 깔끔해 진다.
+
+###### example
+
+```java
+// worst
+if(delegePage(page) == E_OK){
+  if(registry.deleteReference(page.name) == E_OK){
+    if(configKeys.deleteKey(page.name.makeKey()) == E_OK){
+      logger.log("page delete!")
+    }
+  }
+}
+
+// best
+try {
+  deletePage(page);
+  registry.deleteReference(page.name);
+  configKeys.deleteKey(page.name.makeKey()); 
+}catch(Exception e){
+  logger.log(e.getMessage())
+}
+```
+
+
+
+*Try/catch 블록 뽑아내기*
+
+별도의 함수로 뽑아내는 편이 좋다.
+
+정상 동작과 오류 처리 동작을 분리하면 코드이해가 쉬워진다.
+
+###### example
+
+```java
+public void delete(Page page){
+  try{
+    deletePageAndAllReferences(page);
+  }
+  catch(Exception e){
+    logError(e);
+  }
+}
+```
+
+*오류 처리도 한 가지 작업이다.*
+
+- 오류 처리도 한가지 작업만 해야한다.
+
+
+
+*Error.java 의존성 분석*
+
+- 오류 코드를 반환한다 = 오류 코드를 정의한다. 
+-  Error Enum 이 존재하면, `import` 해서 사용해야 한다.
+- 그렇다면 클래스 전부를 다시 컴파일 하고 배치해야 한다. (새 오류 코드를 추가해야함. OCP 위반) 
+- 예외를 사용하면 Exception 클래스에서 파생하므로, 재컴파일 / 재배치를 하지 않아도 된다. 예외를 사용하자!
+
+
+
+### 9 .반복하지 마라!
+
+- 소스 중복 제거는 진짜 중요하다. 중복을 제거하자
+
+
+
+### 10. 구조적 프로그래밍
+
+- goto 쓰지마라 무조건 
+- 함수를 작게 만들어라.
+- 작게만들면 return,break,continue 를 여러 차례 사용해도 의도를 표현하기 쉬워진다.
+
+
+
+### 11. 함수를 어떻게 짜죠?
+
+1. 걍 막 짠다.
+2. 코드를 다듬는다
+3. 함수를 만든다
+4. 이름을 바꾼다
+5. 중복을 제거한다
+6. 메서들를 줄인다
+7. 순서를 바꾼다.
+
+#### **처음부터 탁 짜내는 사람은 존재하지 않는다.**
+
+
+
+### 결론
+
+함수는 길이가 짧고, 이름이 좋고, 체계잡힌 함수가 좋다.
+
+함수가 분명하고 정확한 언어로 깔끔하게 떨어져야 코드를 풀어가기가 쉬워진다.
+
+
+
