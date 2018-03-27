@@ -1,14 +1,14 @@
 
 
-# [Deploy] production 복붙용
+# [Deploy] Ruby On Rails 배포하기 production (복붙용).md
 
-나중에 편하게 하려고 정리.
+나중에 편하게 하려고 정리. (많이 썻는데 최고다. pdf 파일로 정리하면 복붙 구려지는데 깃헙짱!)
 
 #### 만약에
 
 development모드인데 production으로 변경하고싶어요! 하는 사람들은
 
-`[Deploy] AWS에 Ruby On Rails 올리기` 문서 하단을 참고하세요
+`[Deploy] Ruby On Rails 배포하기 (명령어 파헤치기)` 문서 하단을 참고하세요
 
 
 
