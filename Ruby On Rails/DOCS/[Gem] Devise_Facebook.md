@@ -56,7 +56,7 @@ $ rails db:migrate
 
 `FACEBOOK_KEY`, `FACEBOOK_SECRET`은 
 - https://developers.facebook.com/ 
-에서 프로젝트 생성한 뒤 받을 수 있습니다. git에 key,secret을 올리게 되면 다른 사람들이 다 볼 수 있어 보안성이 떨어집니다. 이때 Rails에서 제공하는 `Secret.yml`이나 `Figaro gem` 을 사용하여 키 관리를 할 수 있습니다.
+  에서 프로젝트 생성한 뒤 받을 수 있습니다. git에 key,secret을 올리게 되면 다른 사람들이 다 볼 수 있어 보안성이 떨어집니다. 이때 Rails에서 제공하는 `Secret.yml`이나 `Figaro gem` 을 사용하여 키 관리를 할 수 있습니다.
 
 ##### Secret.yml reference
 - http://guides.rubyonrails.org/4_1_release_notes.html
@@ -221,4 +221,28 @@ end
 - 유효한 OAuth 리디렉션 URI 에 도메인 설정 
 
 - 포함(embed)된 브라우저 OAuth 로그인
-OAuth 클라이언트 로그인을 위해 브라우저 제어 리디렉션 URL을 활성화합니다 버튼 설정! 
+  OAuth 클라이언트 로그인을 위해 브라우저 제어 리디렉션 URL을 활성화합니다 버튼 설정! 
+
+## 2018년 페이스북 3월 
+
+**HTTPS를 실행하세요**. 
+
+이 설정에는 OAuth 리디렉션용 HTTPS 및 JavaScript SDK를 사용하여 액세스 토큰을 가져오는 페이지가 필요합니다. 2018년 3월 현재 새로 만든 모든 앱에는 기본적으로 이 설정이 포함되며, 2019년 3월까지 모든 기존 앱을 HTTPS URL만 사용하도록 마이그레이션해야 합니다. 대부분의 주요 클라우드 앱 호스트는 앱에 대한 TLS 인증서를 무료로 자동 구성해줍니다. 앱을 자체 호스트하거나 호스팅 서비스에서 기본적으로 HTTPS를 제공하지 않는 경우 [Let's Encrypt](https://l.facebook.com/l.php?u=https%3A%2F%2Fletsencrypt.org%2F&h=ATPmQfHbE9NZCWDkesQ4BiyEBJYJavCvBvGTJJuZ-LEMqwFXPPLgDBtgCaZ4BookpznqtjURE7UN6ezmxWXUTtYgYiGP4zAtDZbedyuygk2NF0WB2UXBhMR3q_0)에서 도메인에 대한 무료 인증서를 얻을 수 있습니다.
+
+##### strict 모드 강제 활성화
+
+원래는 strict모드를 활성화 / 비활성화 할 수 있었는데, 정책 변경으로 https 와 strict 모드가 강제 설정이 된 것 같다.
+
+## solve
+
+위를 고대로 따라했다면,
+
+페이스북 로그인 > 설정 > 유효한 OAuth 리디렉션 url 에
+
+```
+https://도메인/users/auth/facebook/callback
+```
+
+을 추가한다
+
+/auth/facebook 만 쳤다가 한시간 또 삽질했당 나같은 사람 없길 ㅠㅠ!
