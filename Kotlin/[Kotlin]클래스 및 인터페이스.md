@@ -1,12 +1,28 @@
 # [kotlin] 클래스 및 인터페이스
 
-### 클래스 선언 
+### 클래스  
+
+- 클래스는 `class 클래스이름 헤더 바디` 로 선언합니다. 
+- 헤더와 바디는 옵션이므로, 생략 가능합니다
+- 단, 기본생성자에 어노테이션이나, 접근 지정자가 있는 경우 constructor 키워드를 써주어야 합니다. 
+
+아래의 것들이 포함됩니다.
+
+1. constrouctors and initializer blocks
+2. functions
+3. properties
+4. nestled and inner class
+5. object declations
 
 ###### example
 
 ```kotlin
 // 접근지정자는 default 가 public 
-class Baz{
+class goo (data: Int) {
+  
+}
+// 이름 바디 
+class Baz {
   ...
 }
 // 클래스 본체 없이 선언 가능하다.
@@ -93,7 +109,44 @@ class Person {
 
 자바에서는 생성자를 클래스와 같은 이름의 함수로 정의합니다.
 
-코틀린은 init 블록을 사용하여 생성자를 대체합니다.
+코틀린은 init 블록을 사용하여 생성자를 대체합니다. init 안에서만 사용할 수 있습니다.
+
+
+
+##### 기본 생성자
+
+- 클래스 별로 1개만 가질 수 있다.
+- 클래스 헤더의 일부 
+- 클래스 이름 뒤에 작성 
+- 기본생성자는 코드를 가질 수 없습니다. 
+  - 초기화는 초기화 블럭에서 작성 되어야 합니다.
+  - 초기화 블록 만드는법 =  init {}
+- 기본 생성자의 파라미터는 init 블록 안에서 사용 가능합니다. 
+
+##### 보조 생성자
+
+- 클래스 별로 여러개를 가질 수 있습니다. 
+- constructor 키워드로 선언합니다. 
+- 클래스가 기본 생성자를 가지고 있을 경우, 보조생성자들은 기본 생성자를 직접 / 간접으로 위임해 주어야 합니다. 
+- this 키워드를 이용합니다. 
+
+##### 생성된 기본 생성자
+
+클래스에 생성자를 생성하지 않으면, 생성된 기본 생성자가 만들어 집니다. 
+
+- 매개변수가 없습니다.
+
+- public 입니다.
+
+- private 로 선언시에는 다른 가시성이 가진, 빈 기본생성자를 만들어야합니다.
+
+  ```kotlin
+  class DontCreatedMe private Constructor{
+    
+  }
+  ```
+
+  ​
 
 ###### example
 
@@ -106,8 +159,22 @@ class Foo {
   }
 }
 
+// 기본 생성자 - 클래스 이름 뒤에 작성
+class Person constructor(firstName: String){}
+// 어노테이션이나, 접근 생성자가 없을 경우 constructor 생략 가능
+class Person (firstName: String){}
+
+// 보조 생성자
+class Person(val name: String) {
+  constructor(name: String,parent: Person):this(name) {
+    
+  }
+  constructor(): this("홍길동",Person())
+  
+}
 // 인자로 받은 생성자 
 class Foo(val a: Int,var b: Char)
+// 기본 생성자의 프로퍼티는 init 메서드에서만 사용할 수 있다.
 
 // 주 생성자 외 다른 생성자가 필요한 경우 ( 여러 생성자가 필요한 경우
 
