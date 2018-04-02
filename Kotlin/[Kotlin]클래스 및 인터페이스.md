@@ -190,27 +190,44 @@ constructor(): this(0,0)
 
 
 
-### 상속 및 인터페이스 구현
+### 상속
 
-자바에서는 `extends` 메서드로 implement 를 구분하지만, 코틀린에서는 `:` 뒤에 상속한 클래스나 인터페이스를 표기합니다.
+자바에서는 `extends` 메서드로  상속을 구분하지만, 코틀린에서는 `:` 뒤에 상속한 클래스나 인터페이스를 표기합니다.
+
+코틀린의 최상위 클래스는 Object가 아닌 Any 입니다.
+
+상위타입을 선언하지 않을 경우 , 자동으로 Any 가 상속됩니다.(default)
+
+Any에는 equal(),hashCode(),toString() 만 존재합니다.
+
+
 
 ###### example
 
-```kotlin
+``` java
 class MainActivity:    
     AppCompatActivity(),
 View.OnClickListener {
   ...
 }
+
+class Example1 // 암시적인 Any 상속
+class Example2: Any() // 명시적인 Any 상속속속속
 ```
 
 
 
-##### 클래스 상속
+##### 클래스 상속하기 
 
 클래스 상속 시에는, 부모의 생성자를 호출해야 합니다. 부모의 생성자가 여러 개라면, 별도의 생성자 선언에서 부모 클래스의 생성자를 호출합니다.
 
+상속할 시에는 앞에 `open` 키워드를 붙힙니다.
+
 부모 클래스 생성자는 `super` 키워드를 사용합니다.
+
+파생클래스에 기본생성자가 있으면, 파생클래스의 기본 생성자에서 상위 타입 생성자를 호출해 사용할 수 있습니다.
+
+파생 클래스에 기본 생성자가 없으면, 보조생성자에서 상위 타입을 super 키워드를 사용해 초기화 해주어야 합니다. 
 
 ```kotlin
 class MyView : View {
@@ -244,6 +261,10 @@ class MyView : View {
 
 코틀린 에서는 이러한 모호함을 대체하기위해 함수 앞에 `override` 키워드를 붙힙니다.
 
+오버라이딩이 될 클래스와, 그 안에 부분 메서드에만 앞에 `open` 키워드를 붙혀줍니다.
+
+클래스는 default 가 final 입니다.
+
 ```kotlin
 class MyActivity: AppCompatActivity(), View.OnClickListener {
   // 이렇게 앞에 붙힙니다.
@@ -271,6 +292,59 @@ open class OpenClass {
   
   // 재정의 가능 함수
   open fun openFunc() 
+}
+```
+
+
+
+##### 프로퍼티 오버라이딩 
+
+메서드 오버라이딩과 유사한 방식으로 오버라이딩이 가능합니다.
+
+```kotlin
+open class Foo {
+  open val x: Int get(..)
+}
+open Bar1: Foo(){
+  override val x:Int
+}
+```
+
+
+
+##### 중복 오버라이딩 시, 
+
+같은 멤버를 중복으로 상속받았을 경우 ( 인터페이스,클래스) 상속 받은 클래스는, 해당 멤버를 오버라이딩하고 자체 구현을 제공해야 합니다.
+
+`super+class명` 을 통해 상위 클래스를 호출할 수 있습니다.
+
+```kotlin
+open class A {
+  open fun f() { printf("AAAA") }
+}
+interface B {
+  fun f() { printf("B") }
+}
+class C(): A(), B {
+  override fun f(){
+    super<A>.f();
+    super<B>.f();
+  }
+}
+```
+
+##### 추상 클래스
+
+abstract 멤버는 구현이 없습니다. 
+
+abstract 클래스나 멤버 함수는 open 키워드가 필요 없습니다.
+
+```kotlin
+abstract class AbsClass {
+  abstract fun f()
+}
+class MyClass(): AbsClass {
+  override fun f() { }
 }
 ```
 
