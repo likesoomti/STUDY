@@ -91,7 +91,7 @@ val jane = Pair("kotlin","3")
 
 ##### Nested Class
 
-중첩 클래스
+#####  중첩 클래스
 
 ```kotlin
 class Outer {
@@ -102,7 +102,7 @@ class Outer {
 var goo = Outer.Nested().foo()
 ```
 
-내부 클래스
+##### 내부 클래스
 
 inner 를 선언하면 바깥쪽 내부의 멤버에 접근할 수 있다.
 
@@ -113,5 +113,24 @@ class Outer {
   }
 }
 var goo = Outer().Nested().foo()
+```
+
+
+
+##### 익명 내부 클래스
+
+객체 표현식을 사용해서 익명 내부 클래스를 사용할 수 있다.
+
+```kotlin
+// 전체 코드의 결과가 object 객체가 된다
+window.addMouseListener(object: MouseAdapter() {
+    override fun mouseClicked(e: MouseEvent) {
+        // ...
+    }                                                                                   
+    override fun mouseEntered(e: MouseEvent) {
+        // ...
+    }
+})
+val listener = ActionListener { println("clicked") }
 ```
 
