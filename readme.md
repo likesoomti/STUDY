@@ -63,7 +63,132 @@ TDD, BDD
 - 필터 맵 기반의 api 를 이용하여 지연 연산을 통해 성능을 최적화 한다.
 - parallelStream 메소드를 통해 손쉬운 병렬 처리를 지원한다.
 
-#####  
+-----
+
+ 
+
+### D
+
+#### DI, Dependency Injection , 의존성 주입
+
+객체의 의존성을 외부에서 주입하는 개념입니다.
+
+크게 세가지가 있습니다.
+
+1. 생성자 사용
+2. setter 메서드를 사용
+3. 초기화 인터페이스 사용 
+
+일단, 의존성 주입을 예시로 쉽게 이해해봐요!
+
+```java
+public interface Unit {
+  public void sayHello();
+}
+class Archur implements Unit {
+    public void sayHello(){
+        System.out.println("나는 안녕 나는 궁수");
+    }
+}
+class Warrior implements Unit{
+    public void sayHello(){
+        System.out.println("나는 안녕 나는 전사");
+    }
+}
+
+public class ioctest {
+    public static void main(String[] args){
+        Unit unit = new Warrior(); // 여기 부분 바뀜..
+        unit.sayHello();
+    }
+}
+```
+
+이렇게 main 안에 있는 `Archur` 클래스를 `Warrior` 클래스로 바꿔주게 되는데, 이런 상황을
+
+`ioctest`가 `Warrior`,`Archur`에 의존하고 있다고 합니다. 기능을 변경할 때 마다 바꿔줘야 하기 때문이죠. 
+
+컴파일시 매우 비효율 적입니다. 
+
+따라서 외부에서 객체를 설정하기 위해, Spring 에서는 외부 `beans.xml`  파일을 사용해 객체를 생성합니다.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://spring~"
+       xmlns:xsi="http://www.w3.org"
+       xsi:schemaLocation="~">
+	<bean id="UnitBean" class="packagename.Archur"/>
+</beans>
+       
+```
+
+```java
+// import java bean 관련 팩토리
+
+public interface Unit {
+  public void sayHello();
+}
+class Archur implements Unit {
+    public void sayHello(){
+        System.out.println("나는 안녕 나는 궁수");
+    }
+}
+class Warrior {
+    public void sayHello(){
+        System.out.println("나는 안녕 나는 전사");
+    }
+}
+
+public class ioctest {
+    public static void main(String[] args){
+        BeanFactory factry = new XmlBeanFactory(new FileSystemResource("resource/beans.xml"));
+        Unit unit = factory.getBean("Unit",UnitBean.class) 
+        unit.sayHello();
+    }
+}
+```
+
+Spring 에서는 BeansFactory 를 이용해 외부 xml 파일에서 객체 생성 주입을 해주는데요.
+
+그러면 프로그래밍 코드 변화 없이, xml에서
+
+```xml
+<bean id="UnitBean" class="packagename.Archur"/>
+```
+
+한줄로 바꿈으로 외부환경에서 관리함으로서, 
+
+1. 소스코드 변경없이 
+
+2. 모듈간의 결합도를 낮춰 유연한 변경을 가능하게 합니다.
+
+   ​
+
+---
+
+
+
+### I
+
+#### Inversion of Control, IOC
+
+**제어 역전**
+
+한마디로 설명하면 프로그램의 흐름을 프레임워크에서 주도하는 것을 말합니다. 
+
+큰 시스템에서는 제어할 객체가 수백개 이상된다. 비슷한 객체를 단위로 묶고 관리해도 많기 때문에 
+
+더 효율적인 방법을 사용하기 위해 제어 역전을 사용합니다.
+
+프레임워크에 제어권이 넘어가면서 **DI** (의존성 주입) ,**AOP** (관점 지향 프로그래밍) 이 가능해 집니다.
+
+큰 프로그램에서는 컴파일 하는데 시간적 비용이 어마어마한데요
+
+소프트웨어에서는 기능 변경(코드 변경) 이 불가피한데, 기능을 추가/보수 할때마다 매번 컴파일을 한다는것은 비효율적 입니다.
+
+따라서 **소스의 변경을 최소화** 하기 위해 사용합니다
+
+##### DI 의존성 주입 알아보기 :  `ctrl+f5 DI 검색 `
 
 
 
