@@ -11,7 +11,7 @@ public class Main {
     }
 ```
 
-##### BufferedReader
+#### BufferedReader
 
 InputStreamReader에 버퍼링 기능을 추가한 것.
 
@@ -31,6 +31,20 @@ public class Main {
 }
 ```
 
+##### bufferedreader int 공백 입력시
+
+StringTokenizer 의 nextToken을 사용하면 공백 다음 값을 불러올 수 있다.
+
+```java
+BufferedReader br = new BufferedReader( new InputStreamReader( System.in ) );
+StringTokenizer st = new StringTokenizer( br.readLine() );
+
+int T = Integer.parseInt( st.nextToken() );
+int N = Integer.parseInt( st.nextToken() )
+```
+
+
+
 ##### 성능비교
 
 `Java.Util.Scanner` : 6.068초
@@ -38,3 +52,4 @@ public class Main {
 `Java.io.BufferReader` : 0.934초 
 
 버퍼 리더가 훨씬 우세하다.
+
