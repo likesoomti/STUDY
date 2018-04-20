@@ -6,8 +6,6 @@ http://codeasy.tistory.com/6?category=751343
 
 를 보고 정리한 글입니다.
 
-
-
 안드로이드 스튜디오 프로젝트를 만들고 키면, 3중 구조로 되어있습니다.
 
 #### 좌측
@@ -162,11 +160,19 @@ https://developer.android.com/guide/topics/manifest/manifest-intro.html?hl=ko
 
 ##### 과 build.gradle
 
+개발환경이 자동으로 만들어 내는 소스 파일이 들어가는 폴더입니다.
 
+각종 라이브러리를 추가하고, 안드로이드 빌드/타겟 버전을 설정할 수 있습니다.
 
 
 
 #### Java 폴더 살펴보기
+
+Java 폴더는 백단 뒤에서 전반적인 처리를 합니다.
+
+동적으로 처리,컨트롤합니다.
+
+
 
 프로젝트를 만든 패키지 폴더에 들어가면 MainActivity.java가 있습니다.
 
@@ -199,6 +205,32 @@ layout 패키지 아래 activity_main 을 view 로 연결합니다.
 activity 파일에서 xml 파일을 연결해 줌을 알 수 있습니다. 
 
 
+
+##### Test 와 androidTest
+
+java에는 크게 3가지 폴더가있는데,
+
+- main
+- test
+- androidTest 가 있습니다.
+
+Android Studio는 테스트 작업을 간단하게 수행할 수 있도록 3개의 패키지를 제공합니다.
+
+##### src/test/java
+
+test 분야는 로컬 단위 테스트를 해볼 수 있습니다. 
+
+테스트에 Android 프레임워크 종속성이 없거나 Android 프레임워크 종속성에 대한 모의 객체를 생성할 수 있는 경우 이 테스트를 사용하면 실행 시간을 최소화할 수 있습니다.
+
+런타임에 이 테스트는 모든 `final` 한정자가 삭제된, 수정된 버전의 `android.jar`에 대해 실행됩니다. 여기서는 Mockito와 같이 흔히 사용되는 모의 라이브러리를 사용할 수 있습니다.
+
+##### src/androidTest/java
+
+하드웨어 기기나 에뮬레이터에서 실행되는 테스트입니다.
+
+ 이 테스트에서는 `Instrumentation` API에 액세스할 수 있으며, 테스트하는 앱의 `Context` 와 같은 정보에 대한 액세스 권한을 개발자에게 제공하고, 개발자는 테스트 코드에서 테스트되는 앱을 제어할 수 있습니다. 
+
+사용자 상호작용을 자동화하는 통합 및 기능적 UI 테스트를 작성하거나 테스트에 모의 객체가 충족할 수 없는 Android 종속성이 있는 경우 이 테스트를 사용합니다.
 
 #### Res 파일 살펴보기
 
