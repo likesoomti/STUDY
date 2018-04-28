@@ -6,8 +6,6 @@
 2.2 컬렉션
 ```
 
-
-
 #### Kotlin DOCS
 
 코틀린은 모든것이 객체입니다. 
@@ -608,7 +606,7 @@ fun <T> varargsParametersFun(vararg ts: T) {
 
 ##### mutable
 
-자료를 수정할 수 있는 타입입니다.
+자료를 수정할 수 있는 타입입니다. 메모리에 대한 구분이있다. 
 
 ##### immutable
 
