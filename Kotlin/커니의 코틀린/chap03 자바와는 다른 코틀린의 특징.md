@@ -229,6 +229,10 @@ fun test3() = 21*1
 
 코틀린에서는 **확장함수** 를 사용하여 상속 없이 기존 클래스에 새로운 함수를 추가할 수 있습니다.
 
+확장함수를 사용하면
+
+1. 기존 클래스의 내용 수정 없이 함수를 만들 수 있습니다.
+
 ##### 확장 함수를 추가하는 대상 클래스
 
 를 리시버 타입이라고 합니다.
@@ -240,3 +244,353 @@ fun test3() = 21*1
 함수의 구현부에서는 `this` 를 사용하여 클래스의 인스턴스에 접근할 수 있습니다.
 
 이를 `리시버 객체` 라고 부릅니다. 
+
+```kotlin
+class Car {
+    fun getPrice():Int {
+        return 10000
+    }
+}
+```
+
+이 자동차에 이름을 출력하는 함수를 확장함수를 통해 만든다면, 
+
+```kotlin
+fun Car.brandName(name: String): String{
+    return name
+}
+```
+
+이렇게 `클래스이름`.`함수이름` 으로 추가할 수 있습니다.
+
+확장 함수는 클래스를 수정하는 것이 아닌, 클래스 타입 변수에 함수를 추가하는 것 입니다.
+
+이 확장함수는 클래스에 "정적으로" 표현되기 때문에 호출되는 표현식의 "type"에 결정됩니다.
+
+```kotlin
+open class Car {
+    open fun getPrice():Int {
+        return 10000
+    }
+}
+class Bus : Car(){
+    override fun getPrice(): Int {
+        return 20000
+    }
+}
+fun Car.getFuel(): String{
+    return "gasolin"
+}
+fun Bus.getFuel(): String {
+    return "LPG"
+}
+fun printPrice(fuel: Car){
+    println(fuel.getPrice())
+}
+fun printFuel(fuel:Car){
+    println(fuel.getFuel())
+}
+fun main(args: Array<String>) {
+    var test: User = User.create("test")
+    drawCircle(10,5,25)
+    drawCircle(x=10,y=5,radius = 25)
+
+    var bus = Bus()
+    printPrice(bus) // 20000
+    printFuel(bus) // gasolin
+}
+```
+
+##### 호출되는 표현식의 타입?
+
+예를들어 같은 이름으로 하나는 상속 오버라이드를, 하나는 확장 함수로 구현해 보겠습니다.
+
+상속된 메서드는 자신의 값을 출력하지만,
+
+확장 함수는 매개변수에 있는 값인 "gasolin" 으로 출력됩니다.
+
+이렇게 정의된 확장 함수는 `{정의된 파일 이름}`KT 클래스 내 정적 함수로 변환됩니다.
+
+
+
+### 연산자 오버로딩
+
+코틀린은 사용자 정의 타입에 한해 연산자 오버로딩을 지원합니다. 
+
+사전 정의된 함수를 재정의 하는 방식으로 오버 로딩을 사용할 수 있스빈다.
+
+오버로딩을 위한 함수는 함수 정의에 `operator` 키워드가 추가됩니다. 
+
+기존의 연산자를 재정의하는 것만 허용합니다. 
+
+##### 단항 연산자 
+
+- +
+- 0
+- !
+- ++
+- --
+
+##### 단항 연산자 재정의하기
+
+```kotlin
+
+class Volume(var left:Int,var right: Int) {
+    operator fun unaryMinus() : Volume {
+        this.left = -this.left
+        this.right= -this.right
+        return this
+    }
+}
+// 확장 함수를 통한 재정의 
+operator fun Volume.inc() : Volume {
+    this.left +=1
+    this.right +=1
+    return this
+}
+```
+
+
+
+### 중위 표기법 지원
+
+코틀린에서는 자용자가 정의한 함수를 중위 표기법을 사용하여 호출할 수 있습니다.
+
+해당 함수는 다음 조건을 만족해야 합니다.
+
+- 함수 선어네 infix 키워드 표기
+- 확장 함수 혹은 멤버 함수이면서, 매개 변수가 하나일 것 
+
+중위 표기법을 사용하면
+
+```kotlin
+class Volume(var left,var right){
+  infix fun inreaseBy(amount:Int){
+    this.left += amount
+    this.right += amount
+  }
+}
+// 확장함수 사용해서
+infix fun Volumn.decreaseBy(amount:Int){
+  this.left -= amount
+  this.right -= amount
+}
+val currentVolume = Volume(50,50)
+// 중위 미사용
+currentVolume.increateBy(30)
+// 중위 사용 
+currentVolume decreaseBy 30 
+```
+
+처럼 문장으로 표현할 수 있어집니다.
+
+
+
+## 3.3 람다 표현식 
+
+람다 표현식은 하나의 함수를 표현할 수 있습니다.
+
+특히 익명 클래스를 간결하게 표현할 때 사용할 수 있으므로 매우 유용합니다. 
+
+##### java
+
+익명 클래스를 사용하면, 문법상 한계로 인해 리스너의 주요 구현부 코드보다, 
+
+익명 클래스를 생성하는 코드가 길었습니다.
+
+```java
+Button button = hiih;// button instance
+button.setOnClickListener(new View.OnClickListener(){
+  @override
+  public void onClick(View v){
+    dosomething()
+  }
+})
+ 
+```
+
+##### 람다를 사용한 java 
+
+람다를 사용하여, 실제 메서드 구현에 필요한 요소만 기술할 수 있습니다.
+
+```java
+Button button = hiih;// button instance
+button.setOnClickListener((View v) -> doSomething());
+// 타입 생략 가능
+button.setOnClickListener(v -> doSomething())
+```
+
+
+
+코틀린에서도 람다를 사용할 수 있습니다. 
+
+코틀린의 람다 표현식은 자바의 람다와 비슷하지만, 중괄호를 사용하여 앞 뒤를 묶어준다는 점이 다릅니다. 
+
+```kotlin
+{x:Int,y:Int -> x + y}
+```
+
+##### 코틀린을 사용한 람다표현식
+
+```kotlin
+val button: Button =...
+button.setOnClickListener({v:View -> dosomething()})
+// 인자 생략 가능 
+button.setOnClickListener({v -> dosomething()})
+```
+
+##### 멤버 참조
+
+객체에서 하나의 메서드만 호출한다는 뜻입니다.
+
+자바에서는 메서드참조라고 불립니다.
+
+```kotlin
+fun doSomethingWithView(view: View){...}
+
+val button :Button = //
+
+// doSomethingWithView 호출
+button.setOnClickListener({v -> doSomethingWithView(v)})
+
+// 멤버참조 
+button.setOnClickListener(::doSomethingWithView)
+```
+
+코틀린에서는 프로퍼티 또한 멤버 참조를 지원합니다.
+
+```kotlin
+class Person(val age:Int,val name:String) {
+    val adult = age> 19
+
+}
+
+fun printAdults(people: List<Person>){
+    people.filter( {person -> person.adult} ).forEach(println("Name= ${it.name}"))
+    people.filter(Person::adult).forEach{ println()"Name=${it.name}"}
+}
+```
+
+
+
+### 코틀린 람다 표현식의 유용한 기능
+
+함수를 호출할 때 대입하는 인자 중 마지막 인자가 함수 타입이고, 인자에 함수를 대입할 때 람다 표현식을 사용한다면 
+
+람다표현식은 함수의 인자를 대입하는 괄호 외부에 선언할 수 있습니다.
+
+```kotlin
+fun doSomethingWithView(view: View){...}
+
+val button :Button = //
+
+// doSomethingWithView 호출
+button.setOnClickListener({v -> doSomethingWithView(v)})
+// 하나만 보낼 경우, 괄호 생략 가능
+button.setOnClickListener {v -> doSomethingWithView(v)}
+// 매개변수가 1개일 경우 it 으로 변환 가능
+button.setOnClickListener{doSomethingWithView(it)}
+```
+
+
+
+## 3.4 코틀린의 여타 특징
+
+코틀린의 특별한 기능에 대해 알아봅니다.
+
+
+
+### 타입 별칭
+
+제네릭 타입은, 다소 복잡한 형태의 타입을 사용하는 경우가 있습니다.
+
+이럴 경우 타입 별칭을 사용할 수 있습니다.
+
+`typealias`를 사용하여 정의합니다.
+
+```kotlin
+typealias PeopleList = List<Person>
+typealias PeopleInTags = Map<String,Person>
+
+fun SendMessage(people: List<Person>)
+
+==
+
+fun SendMessage(people: PeopleList)
+```
+
+클래스나 함수와 마찬가지로 타입을 인자로 받을 수 있습니다.
+
+``` kotlin
+typealias ItemsInTags<T> = Map<String,T>
+```
+
+함수형 타입에도 타입 별칭을 지정할 수 있습니다.
+
+다음은 함수형 타입을 매개변수로 받는 간단한 함수입니다.
+
+```kotlin
+fun sednMsg(people:List<Person>,filterFunc: (Person) -> Boolean){
+  people.filter(filterFunc).forEach{
+    
+  }
+}
+
+// 타입 선언
+typealias PersonFilter = (Person) -> Boolean
+fun sednMsg(people:List<Person>,filterFunc: PersonFilter){
+  people.filter(filterFunc).forEach{
+    
+  }
+}
+```
+
+타입 별칭은 새로운 클래스가 생성되는 것이 아닙니다.
+
+타입 별칭으로 선언된 타입은 컴파일 시점에 모두 원래 타입으로 변환됩니다.
+
+실행 시점의 부하가 없습니다.
+
+### 분해 선언 
+
+복잡한 자료구조를 사용하다보면, 필드 중 일부 항목만 사용하거나, 별도로 변수를 뽑아 사용하는 경우가 있습니다.
+
+코틀린에서는 각 프로퍼티가 가진 자료의 값을 한번에 변수에 할당할 수 있습니다.
+
+```kotlin
+data class Person(val age: Int, val name:String)
+
+val person : Person
+// 여러개의 값을 한번에 할당 
+val (ageOfPerson , nameOfPerson) = person 
+```
+
+분해선언을 사용하면 내부적으로 값에 `component1()`,`component2()` 의 값이 할당됩니다.
+
+클래스에 프로퍼티 수 만큼 `componentN()`함수가 있어야하며, 이 함수를 포함하고 있는 클래스에서만 분해 선언을 사용할 수 있습니다.
+
+분해 선언을 기본적으로 제공하는 클래스는 다읍과 같습니다.
+
+- data class
+- kotlin.Pair
+- kotlin.Triple
+- kotlin.collections.Map.Entry
+
+분해 선언은 반복문에도 사용할 수 있으며, 맵 자료구조를 사용할 때 유용합니다. 
+
+```kotlin
+val cities:Map<String,String> = ...
+
+for ((citycode,name) in cities){
+  println("$citycode=$name")
+}
+
+// 람다 
+cities.forEach { citycode,name -> println("$citycode=$name)"}
+```
+
+
+
+만약, `ComponentN()` 를 제공하지 않는 클래스에서 선언하고 싶을 시, 선언순서 / 타입에 알맞게 추가해 주면 됩니다.
+
+일종의 규칙처럼 선언되기 때문에, 앞에 `operator` 를 선언해 주어야 합니다. 
