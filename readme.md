@@ -166,6 +166,81 @@ Spring 에서는 BeansFactory 를 이용해 외부 xml 파일에서 객체 생�
 
 ---
 
+### E
+
+#### Exception
+
+##### 예외처리
+
+ 프로그래밍 실행중에 프로그램 흐름에 어긋나는 이벤트를 "예외"라고 합니다.
+
+1. 메모리가 부족하거나
+2. 입출력 연산 중 에러가 발생하거나
+
+이런 프로그래밍 에러가 발생시, 이 에러를 잡아주는 코드를 설정하는것을,  **예외처리** 라고합니다.
+
+자바에서는 try-catch-finally 문으로 이 예외를 잡습니다.
+
+```java
+try{
+  //
+}catch(Exception e){
+  
+}finally{
+  
+}
+```
+
+##### 특징
+
+1. 에러가 나는 코드만 관리할 수 있다.
+2. 에러를 그룹별로 관리할 수 있다.
+3. Call Stack으로 에러발생을 전파할 수 있다.
+
+##### 예외처리 계층 
+
+예외처리 계층을 보면 object 는 `Throwable` 이라는 최상위 인터페이스를 구현하여 예외처리를 던집니다.
+
+
+
+
+
+![Alt text](https://lh5.googleusercontent.com/WqqNoyFEkZXfmZBBQjgIutY72_BUV6_By_BAe7Ih9u36HfelS3nTWQEYtdRUkQS32Tuhg9P9CUXo-jgvOpkO84vLm2viI4Od0BNustwONdMm7DKZnKC6kyVHyRJbsESLIPV4uBU)
+
+
+
+예외는 크게 
+
+1. error
+2. Exception
+
+으로 나뉩니다.
+
+##### error
+
+JVM 에서 생기는 에러를 말합니다.
+
+ 애플리케이션 구동 범위를 벗어나기 때문에 코드,로직,흐름에서 에러를 처리할 수 없습니다.
+
+##### exception
+
+프로그래머들이 예상할 수 있는 에러입니다.
+
+1. 체크 할수 있는 예외와,
+2.  없는 예외로 나뉩니다.
+
+##### 체크되는 예외
+
+컴파일 타임에 체크되어야하고, 
+
+프로그래머에게 `throws`  메서드를 선언할 것을 요구합니다.
+
+코틀린에서는 이런 체크되는 예외를 따로 검사하지 않습니다.
+
+##### 체크되지 않는 예외
+
+프로그래머에게 예외 처리를 강조하지 않는 예외입니다. 
+
 
 
 ### I
