@@ -357,6 +357,7 @@ class HomeActivity : AppCompatActivity() {
   - 저장된 아이디, 비밀번호가 일치 했을 경우만 로그인 성공
     (SharedPreference에 저장된 값과 사용자가 입력한 값과의 비교)
 3) 로그인 성공화면 :
+ - 메인화면에서 사용자가 입력한 ID 값을 전달 받아 보여줌 (Intent.getStringExtra 사용)
  - (선택) 메인화면에서 초기화버튼이 있어 저장된 아이디, 비밀번호를 초기화 하고 회원가입 페이지로 이동한다.
 4) 공통
  - Kotlin으로 작성할 것
@@ -364,6 +365,8 @@ class HomeActivity : AppCompatActivity() {
  - 비밀번호, 비밀번호 확인은 inputType 변경할 것(layout)
  - 이메일의 inputType 은 Email로 변경할 것 (textEmailAddress)
 ```
+
+####  
 
 
 
