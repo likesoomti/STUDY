@@ -14,7 +14,7 @@
 
 깃을 사용하면 여러 파일을 안남기고, 하나의 파일을 인터넷에 공유하고 같이 기록을 남겨 편리하게 해결할 수 있습니다.
 
-![Alt text](/Users/hansumin/STUDY/GITHUB%20/img/add12.png)
+![Alt text](https://github.com/likesoomti/STUDY/blob/master/GITHUB%20/img/add12.png?raw=true)
 
 위 사진처럼 제가 폴더에 내용을 추가하거나, 변경된 기록을 남겨주는데요 이것을 **커밋** 이라고합니다.
 
@@ -26,7 +26,7 @@
 
 ### 택배로 비유해서 이해해보자
 
-![Alt text](/Users/hansumin/STUDY/GITHUB%20/img/add23.png)
+![Alt text](https://github.com/likesoomti/STUDY/blob/master/GITHUB%20/img/add23.png?raw=true)
 
 내 컴퓨터에서 프로젝트를 올리는게 아니라, 내 깃 주소에서 프로젝트를 만드는 경우 보여주는 명령어입니다. 
 
@@ -42,7 +42,7 @@
 
 #### git init
 
-![Alt text](/Users/hansumin/STUDY/GITHUB%20/img/add13.png)
+![Alt text](https://github.com/likesoomti/STUDY/blob/master/GITHUB%20/img/add13.png?raw=true)
 
 `init` 은 `initialize` 의 약자로 새로 만들겠다! 라는 뜻입니다.
 
@@ -62,7 +62,7 @@
 
 #### git add 
 
-![Alt text](/Users/hansumin/STUDY/GITHUB%20/img/add14.png)
+![Alt text](https://github.com/likesoomti/STUDY/blob/master/GITHUB%20/img/add14.png?raw=true)
 
 git add 는 제가 **github**에 보낼 파일들을 상자에 넣는 역할입니다 `.` 을 쓰면 모든 파일을 넣어주는데요,
 
@@ -74,13 +74,13 @@ git add 는 제가 **github**에 보낼 파일들을 상자에 넣는 역할입�
 
 #### git commit
 
-![Alt text](/Users/hansumin/STUDY/GITHUB%20/img/add15.png)
+![Alt text](https://github.com/likesoomti/STUDY/blob/master/GITHUB%20/img/add15.png?raw=true)
 
 `git commit` 은 테이프 칠을 한 것이라고 생각하면됩니다.
 
 보통 `git commit -m '깃헙 내용을 쉽게 정리해봤다'` 이런식으로 뒤에 `-m` 을 붙혀서 메세지를 남기는데요 
 
-![Alt text](/Users/hansumin/STUDY/GITHUB%20/img/add16.png)
+![Alt text](https://github.com/likesoomti/STUDY/blob/master/GITHUB%20/img/add16.png?raw=true)
 
 보통 우리가 조별과제할때 저런식으로 파일이 복제되는데, 
 
@@ -94,7 +94,7 @@ git add 는 제가 **github**에 보낼 파일들을 상자에 넣는 역할입�
 
 #### git remote add origitn git url 주소
 
-![Alt text](/Users/hansumin/STUDY/GITHUB%20/img/add17.png)
+![Alt text](https://github.com/likesoomti/STUDY/blob/master/GITHUB%20/img/add17.png?raw=true)
 
 
 
@@ -104,7 +104,7 @@ git add 는 제가 **github**에 보낼 파일들을 상자에 넣는 역할입�
 
 #### git push
 
-![Alt text](/Users/hansumin/STUDY/GITHUB%20/img/add18.png)
+![Alt text](https://github.com/likesoomti/STUDY/blob/master/GITHUB%20/img/add18.png?raw=true)
 
 **내컴퓨터에** 에서 보낸 파일을 **깃헙** 에 택배를 보내듯이 전송! 합니다. 그럼 github 주소를 들어가보면 올라온 것을 볼 수 있습니다.
 
@@ -124,12 +124,12 @@ git add 는 제가 **github**에 보낼 파일들을 상자에 넣는 역할입�
 
 ##### 
 
-![Alt text](/Users/hansumin/STUDY/GITHUB%20/img/add19.png)
+![Alt text](https://github.com/likesoomti/STUDY/blob/master/GITHUB%20/img/add19.png?raw=true)
 
 
 
-![Alt text](/Users/hansumin/STUDY/GITHUB%20/img/add20.png)
+![Alt text](https://github.com/likesoomti/STUDY/blob/master/GITHUB%20/img/add20.png?raw=true)
 
-![Alt text](/Users/hansumin/STUDY/GITHUB%20/img/add21.png)
+![Alt text](https://github.com/likesoomti/STUDY/blob/master/GITHUB%20/img/add21.png?raw=true)
 
-![Alt text](/Users/hansumin/STUDY/GITHUB%20/img/add22.png)
+![Alt text](https://github.com/likesoomti/STUDY/blob/master/GITHUB%20/img/add22.png?raw=true)
