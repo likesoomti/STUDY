@@ -391,6 +391,20 @@ validates :phone, format: {with:/\A^\d{3}-\d{3,4}-\d{4}$\z/,:message => "번호�
 
 
 
+##유용한 메서드
+
+### 로그아웃 후 리디렉션 메서드
+
+디바이스에서 로그아웃은 `delete` 메서드를 사용하기 때문에 리디렉션이 안된다(리디렉션은 오로지 `get` 만 가능) 
+
+따라서 어떤 페이지에 갔을 경우 바로 삭제하고싶은경우! 이 메세지를 사용하면 된다.
+
+```ruby
+sign_out_and_redirect(new_user_session_path)
+```
+
+
+
  
 
 
