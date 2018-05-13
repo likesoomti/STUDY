@@ -1,5 +1,3 @@
-
-
 # 로그인 화면 만들기
 
 로그인 화면을 만들면서, 코틀린으로 만드는 안드로이드에 적응을 해보자.
@@ -35,7 +33,7 @@
 
 - 회원가입 (SignUpActivity)
 - 메인화면 (MainActivity) = LoginActivity
-- 로그인 성공화면 (IndexActivity)
+- 로그인 성공화면 (HomeActivity)
 
 #### 회원가입 액티비티 Layout 만들기
 
@@ -300,6 +298,8 @@ apply plugin: 'kotlin-android-extensions' // 익스텐션 플러그인 적용
 
 인텐트 사용에 익숙치않아..(까먹음) 검색을 해봤다.
 
+인텐트를 간단히 설명하면 액티비티에서 액티비티로 보내주는 개념이다.
+
 ##### java
 
 ```java
@@ -313,7 +313,6 @@ myIntent.putExtra("메시지", "이것이 메시지의 vaule입니다.");
 ##### kotlin
 
 ```java
-
 val nextIntent = Intent(this, SecondActivity::class.java)
 nextIntent.putExtra("nameKey", "nachoi")
 startActivity(nextIntent)
@@ -346,27 +345,142 @@ class HomeActivity : AppCompatActivity() {
 
 
 
+### 4. SharedPreference 사용해 아이디,비밀번호 저장하기 
+
+#### 안드로이드에서 데이터 저장하는 방법 
+
+안드로이드에서 데이타를 저장할때 사용하는 방법 중 하나.
+
+>1. 파일 생성
+>
+>
+>2. 안드로이드 내부 DB 사용
+>
+>
+>3. SharedPreference 사용
+
+으로 나눌 수 있는데, 여기서  **SharedPreference** 를  찾아보았다.
+
+처음 아는 개념이여서 상세히 검색해 보았다.
+
+#### SharedPreference
+
+##### 기본 개념
+
+SharedPreference는 ` Key/Value` 형태로 데이타 저장할 수 있다. 
+
+저장할 수 있는 데이타 구조로 내부적으로는 XML 파일로 저장이 된다.
+
+사용법이 매우 간단하기 때문에
+
+1. 일반적인 설정값이나 
+2. 세션 정보
+3. 사용자 정보
+4. 간단하고 가벼운 데이터
+
+를 저장하는데 주로 사용된다고 한다. **안드로이드 파일 시스템 내에 XML 파일로 접근이 되기 때문에, 보안적으로 안전하지 않을 수 있다.**
+
+##### 사용 방법 
+
+실제로 사용하는 방법은 `Activity`나 `Service`  클래스에서 `Context`를 가지고 온후, 해당` Context`를 통하여 `SharedPreference`를 생성하여, 데이타를 저장하면 된다.
+
+###### sample
+
+```java
+public void writeSharedPreference(View view){
+
+        EditText txtValue = (EditText) findViewById(R.id.txtValue);
+        String value = txtValue.getText().toString();
+
+
+        // 1. get Shared Preference
+        SharedPreferences sharedPreference
+                = this.getSharedPreferences("MYPREFRENCE", Context.MODE_MULTI_PROCESS | Context.MODE_WORLD_READABLE); 
+
+        // 2. get Editor
+        SharedPreferences.Editor editor = sharedPreference.edit();
+
+        // 3. set Key values
+        editor.putString("MYKEY",value);
+        editor.putString("KEY2", "VALUE2");
+
+        // 4. commit the values
+        editor.commit();
+
+    }
+```
+
+##### 1.  get Shared Preference
+
+```java
+SharedPreferences sharedPreference
+                = this.getSharedPreferences("MYPREFRENCE", Context.MODE_MULTI_PROCESS | Context.MODE_WORLD_READABLE); 
+```
+
+`ApplicationContext` 로 부터 `getSharedPreferences` 를 가져올 수 있다.
+
+매개변수는 *("`set Name`","`Access Mode`")* 가 들어간다. 
+
+##### Access Mode ?
+
+이 데이터에 대한 모드를 설정할 수 있다. `MODE_MULTI_PROCESS` 는 여러 프로세스 간 공유가 가능하고, 읽을 수 있는 모드이다. 
+
+**Access Mode** 는 보통 `MODE_PRIVATE`을 사용한다.
+
+> `MODE_PRIVATE`
+>
+>  다른 애플리케이션 접근 불가하고, 이 SharedPreference를 만든 애플리케이션만 접근이 가능하게 한다. 
+>
+> `MODE_WORLD_READABLE`
+>
+>  다른 애플리케이션도 읽기를 허용한다.
+>
+> ` MODE_WORLD_WRITABLE` 
+>
+> 다른 애플리케이션도 쓰기를 허용한다.
+
+#####  2. SharedPreferences.Editor editor = sharedPreference.edit();
+
+`context`에서 받아온 `sharedPreference` 를 가지고 데이터를 기록하기 위해서는  `SharedPreferences.Editor` 인스턴스를 얻어야 한다. 이후 데이터의 `key`,`value` 값을 설정할 수 있다.
+
+##### 3.  editor.putString("MYKEY",value);
+
+데이터를 세팅해준다. 
+
+##### 4. editor.commit();
+
+저장한다. `commit()` 이 되야 xml 에 기록이 된다.
+
+
+
+이 개념을 가지고 코틀린에 적용해보겠다. 
+
+##### SharedPreference을 사용하요 캐쉬에 아이디, 비밀번호 1개만 저장
+
+코틀린을 사용하면 깔끔해진다.
+
+```kotlin
+val pref = this.getPreferences(Context.MODE_PRIVATE)
+val editor = pref.edit()
+
+editor.putString("id","soomti@likelion.org")
+editor.putString("pwd","qwer1234")
+
+editor.commit();
+
+// get 
+pref.getString("id","")
+pref.getString("pwd","")
+```
+
+
+
 ### TO DO
 
 ```
-* 간단한 로그인 화면을 구성한다.
-1) 회원가입 :
-  - SharedPreference을 사용하요 캐쉬에 아이디, 비밀번호 1개만 저장
-2) 메인화면 :
-  - 아이디 , 비밀번호가 입력 되었는지 확인
-  - 저장된 아이디, 비밀번호가 일치 했을 경우만 로그인 성공
-    (SharedPreference에 저장된 값과 사용자가 입력한 값과의 비교)
 3) 로그인 성공화면 :
- - 메인화면에서 사용자가 입력한 ID 값을 전달 받아 보여줌 (Intent.getStringExtra 사용)
  - (선택) 메인화면에서 초기화버튼이 있어 저장된 아이디, 비밀번호를 초기화 하고 회원가입 페이지로 이동한다.
-4) 공통
- - Kotlin으로 작성할 것
- - 아이디, 비밀번호, 비밀번호확인, 이메일은 무조건 1줄로만 나오게 할 것
- - 비밀번호, 비밀번호 확인은 inputType 변경할 것(layout)
- - 이메일의 inputType 은 Email로 변경할 것 (textEmailAddress)
 ```
-
-####  
 
 
 
@@ -383,3 +497,7 @@ java.lang.NoClassDefFoundError: Failed resolution of: Lcom/soomti/loginproject/L
 #### 참고자료
 
 https://nachoi.github.io/studynote/2017/11/28/Android-Kotlin-putExtra.html
+
+http://bcho.tistory.com/1054
+
+<http://humble.tistory.com/9> 
