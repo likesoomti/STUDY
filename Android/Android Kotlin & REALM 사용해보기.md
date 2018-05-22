@@ -178,6 +178,33 @@ user.email = user_email.text.toString()
 
 
 
+
+
+## Error
+
+####'Modelname' has a primary key, use 'createObject(Class<E>, Object)' instead.
+
+프라이머리키를 지정 안해서 생겼다..
+
+##### after
+
+```kotlin
+// 데이터 베이스 추가
+realm.executeTransaction { r ->
+  val user = r.createObject(User::class.java, user_id.text.toString())
+  user.password = user_password.text.toString()
+  user.email = user_email.text.toString()
+}
+```
+
+
+
+#### Third Party...
+
+run  > Edit Configuration 에서 awake 빼고 지워주자.
+
+
+
 ## 참고자료
 
 https://realm.io/kr/docs/java/latest/#getting-started
